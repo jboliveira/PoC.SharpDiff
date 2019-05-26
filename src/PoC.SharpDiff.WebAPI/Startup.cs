@@ -3,8 +3,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PoC.SharpDiff.WebAPI.Domain.Repositories;
+using PoC.SharpDiff.WebAPI.Domain.Services;
 using PoC.SharpDiff.WebAPI.Infrastructure.Extensions;
 using PoC.SharpDiff.WebAPI.Infrastructure.Swagger;
+using PoC.SharpDiff.WebAPI.Persistence.Repositories;
+using PoC.SharpDiff.WebAPI.Services;
 
 // Applies web API-specific behaviors to all controllers in the assembly.
 [assembly: ApiController]
@@ -68,7 +72,10 @@ namespace PoC.SharpDiff.WebAPI
 		/// </summary>
 		private static void RegisterServices(IServiceCollection services)
 		{
-			// Register here...
+			services.AddScoped<IContentRepository, ContentRepository>();
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+			services.AddScoped<IContentService, ContentService>();
 		}
 	}
 }
