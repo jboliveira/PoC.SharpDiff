@@ -115,6 +115,8 @@ tests
 - Use Docker/Docker Compose for database/SQLServer 
 - Capture application logs via third-party service
 - Create a Watchdog UI to watch health and report about the API
+- Add Postman collection and environment
+- Add a Vault service to manage secrets and protect sensitive data
 - WIP :rocket:
 
 
