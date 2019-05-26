@@ -18,7 +18,7 @@ script:
 - dotnet restore
 - dotnet build
 - dotnet test tests/PoC.SharpDiff.Tests/PoC.SharpDiff.Tests.csproj
-- sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_LOGIN -Dsonar.password=$SONAR_PASW -Dsonar.verbose=true  -X
+#- sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_LOGIN -Dsonar.password=$SONAR_PASW -Dsonar.verbose=true  -X
 
 branches:
   only:
