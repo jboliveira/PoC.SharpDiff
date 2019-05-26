@@ -3,6 +3,8 @@ using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using PoC.SharpDiff.WebAPI.Persistence.Contexts;
 using Serilog;
 
 namespace PoC.SharpDiff.WebAPI
@@ -25,6 +27,13 @@ namespace PoC.SharpDiff.WebAPI
 			{
 				Log.Information("Configuring web host ({ApplicationContext})...", AppName);
 				var host = BuildWebHost(configuration, args);
+
+				Log.Information("Configuring database (SharpDiffDbContext)...");
+				using (var scope = host.Services.CreateScope())
+				using (var context = scope.ServiceProvider.GetService<SharpDiffDbContext>())
+				{
+					context.Database.EnsureCreated();
+				}
 
 				Log.Information("Starting web host ({ApplicationContext})...", AppName);
 				host.Run();

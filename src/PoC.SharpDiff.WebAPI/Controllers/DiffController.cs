@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace PoC.SharpDiff.WebAPI.Controllers
 {
-	[Route("v1/[controller]")]
+	/// <summary> Diff Controller </summary>
+	[ApiVersion("1.0")]
+	[Route("v{version:apiVersion}/[controller]")]
 	public class DiffController : ControllerBase
 	{
 		[HttpPost("{id}/left")]
