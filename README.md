@@ -4,6 +4,8 @@
 
 ## Overview
 
+### Project Structure:
+
 ```
 src
  |__ PoC.SharpDiff.WebAPI
@@ -11,10 +13,7 @@ tests
  |__ PoC.SharpDiff.Tests
 ```
 
-### API Documentation
-
-
-### Tech Stack
+### Tech Stack:
 
 - Visual Studio 2019 (Mac/Win)
 - .NET Core 2.2
@@ -28,7 +27,64 @@ tests
 - Azure SQL Server
 - xUnit
 
-#### Packages
+### API Documentation
+
+- Swagger: `{host}/swagger`
+- HealthCheck: `{host}/hc`
+
+#### Endpoint: Creates the content for left side.
+- URL: `/v1/diff/{id}/left`
+- Method: `POST`
+- URL params:
+    Required:
+    - `id=integer`
+- Body params: `{ "data": "string" }`
+- Content-Type: `application/json`
+- Success Response:
+    Code: 200 
+    Content: `{ "id": 0, "direction": "left", "base64String": "string"}`
+- Error Response:
+    Code: 400 BAD REQUEST
+
+#### Endpoint: Creates the content for right side.
+- URL: `/v1/diff/{id}/right`
+- Method: `POST`
+- URL params:
+    Required:
+    - `id=integer`
+- Body params: `{ "data": "string" }`
+- Content-Type: `application/json`
+- Success Response:
+    Code: 200 
+    Content: `{ "id": 0, "direction": "right", "base64String": "string"}`
+- Error Response:
+    Code: 400 BAD REQUEST
+
+#### Endpoint: Compare the specified content id and returns the differences.
+- URL: `/v1/diff/{id}`
+- Method: `GET`
+- URL params:
+    Required:
+    - `id=integer`
+- Content-Type: `application/json`
+- Success Response:
+    Code: 200 
+    Content: 
+    `{ "string" }` - If differences not found, just message
+    `{ { "offset": 0, "lenght": 0 } }` - If differences found
+- Error Response:
+    Code: 400 BAD REQUEST
+- Not Found Response:
+    Code: 404 NOT FOUND
+    Content: `{ "string" }`
+
+### Next
+[ ] Include a few more tests
+[ ] Improve persistence layer
+[ ] Review comments and documentation
+[ ] ...
+
+### Packages
 
 HealthChecks Packages:
 - `Microsoft.Extensions.Diagnostics.HealthChecks`
@@ -55,13 +111,6 @@ FluentValidation Packages:
 EFCore - SQLServer Packages:
 - `Microsoft.EntityFrameworkCore.SqlServer`
 - `Microsoft.EntityFrameworkCore.Design`
-
-
-### Next
-[ ] Include a few more tests
-[ ] Improve persistence layer
-[ ] Review comments and documentation
-[ ] ...
 
 
 [//]: #
