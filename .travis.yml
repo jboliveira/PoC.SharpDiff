@@ -1,10 +1,16 @@
-﻿language: csharp
+language: csharp
 solution: PoC.SharpDiff.sln
 mono: none
 sudo: required
 dist: xenial
 dotnet: 2.2
+addons:
+  sonarcloud:
+    organization: jboliveira-github
+    token:
+      secure: "zPCIfh8Tryy0Q9VGSr8e1BI+mJMR79pom0SIK6TUUq5d4bNYaJfwvps75tAMTNZJ58gnf8sS4MeOiqBJk574zi9VPFSOzkVx20wQ8fbLtnzlM+sUJCDVKBdClIgKqDKsm7B8TqKwibq+hbc8JJZxVf8K/zzLEQZ9kGTifVWt5H8IN4gNq7Rjarx6XaujElyvCa/ZPQBDU2DdiSilRn3M0aL/RmHnL+l3oh7cvH1/QVb4TeqJdz+pOMHj1IO9P6+gRpebmr/g3hP6+P8LAw+IroIt4Dx1gQUbqwX7afVvM6S0tY+8iRN3usEKhty3YfcmFzIxhcoDlsysQMdSp72dxE3gUbNWWMoEOgIVjC46o0iiInaEjJN3n64m4bpKdTO5Rjt6AUyjxIEpQyQImFC/s4LOBaFf1R2idLN/GWumX0W1ObqXd0TI7VZfnyTt6Rd9+ElNL+Ie84f4eqqpostp2EN0k2wzEqpzoD6578Sn8qtugm+K/SxSuytF9cOZ/kGmefWKH2K4XDkCxaKPPIt5QkSLmX0OSSt8Hjbgn1e4dUpt76QLaUC19dHoQfQSSHz3JDbxiced26OQfexf4v2rEp6/frA1bjg/4GwS3DZGK9GMPnBM9IUI0WjFxoESAjjXSWkdtodOhyzykiyuPYiNicuvBwIKojKZ4vb2sYHraJE="
 script:
-  - dotnet restore
-  - dotnet build
-  - dotnet test tests/PoC.SharpDiff.Tests/PoC.SharpDiff.Tests.csproj
+- dotnet restore
+- dotnet build
+- dotnet test tests/PoC.SharpDiff.Tests/PoC.SharpDiff.Tests.csproj
+- sonar-scanner
