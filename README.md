@@ -85,10 +85,10 @@ tests
 
 ### Next
 
-[ ] Include a few more tests
-[ ] Improve persistence layer
-[ ] Review comments and documentation
-[ ] ...
+- Include a few more tests
+- Improve persistence layer
+- Review comments and documentation
+- WIP
 
 
 ### Packages
