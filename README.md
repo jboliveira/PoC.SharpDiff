@@ -31,6 +31,30 @@ tests
 - xUnit
 
 
+### Installing and Running
+
+```sh
+    #Clone Git Repository
+    git clone git@github.com:jboliveira/PoC.SharpDiff.git
+
+    #Access Project Root Folder
+    cd PoC.SharpDiff
+    
+    #Access API folder
+    cd src/PoC.SharpDiff
+
+    #Build and Restore packages
+    dotnet restore
+    dotnet build
+
+    #Run API
+    dotnet run
+
+    #Access through address:
+    https://localhost:5001/swagger
+```
+
+
 ### API Documentation
 
 - Swagger: `{host}/swagger`
@@ -38,11 +62,11 @@ tests
 
 
 #### Endpoint: Creates the content for left side.
-- URL: `/v1/diff/{id}/left`
+- URL: `{host}/v1/diff/{id}/left`
 - Method: `POST`
 - URL params:
     - `id=integer` [Required]
-- Body params: `{ "data": "string" }`
+- Body params: `{ "data": "[base64 encoded data]" }`
 - Content-Type: `application/json`
 - Success Response:
     - Code: 200 
@@ -52,11 +76,11 @@ tests
     
     
 #### Endpoint: Creates the content for right side.
-- URL: `/v1/diff/{id}/right`
+- URL: `{host}/v1/diff/{id}/right`
 - Method: `POST`
 - URL params:
     - `id=integer` [Required]
-- Body params: `{ "data": "string" }`
+- Body params: `{ "data": "[base64 encoded data]" }`
 - Content-Type: `application/json`
 - Success Response:
     - Code: 200 
@@ -66,7 +90,7 @@ tests
     
     
 #### Endpoint: Compare the specified content id and returns the differences.
-- URL: `/v1/diff/{id}`
+- URL: `{host}/v1/diff/{id}`
 - Method: `GET`
 - URL params:
     - `id=integer` [Required]
@@ -81,13 +105,14 @@ tests
 - Not Found Response:
     - Code: 404 NOT FOUND
     - Content: `{ "string" }`
-    
+
 
 ### Next
 
 - Include a few more tests
-- Improve persistence layer
+- Improve persistence layer and models
 - Review comments and documentation
+- Use Docker/Docker Compose for database/SQLServer
 - WIP
 
 
