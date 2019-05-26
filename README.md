@@ -11,6 +11,9 @@ tests
  |__ PoC.SharpDiff.Tests
 ```
 
+### API Documentation
+
+
 ### Tech Stack
 
 - Visual Studio 2019 (Mac/Win)
@@ -54,8 +57,11 @@ EFCore - SQLServer Packages:
 - `Microsoft.EntityFrameworkCore.Design`
 
 
-### Next/Improvements
-[] ...
+### Next
+[ ] Include a few more tests
+[ ] Improve persistence layer
+[ ] Review comments and documentation
+[ ] ...
 
 
 [//]: #

@@ -3,10 +3,6 @@ solution: PoC.SharpDiff.sln
 sudo: required
 dist: xenial
 dotnet: 2.2
-jdk:
-  - oraclejdk8
-mono: 
-  - latest
 
 env:
   global:
@@ -22,7 +18,7 @@ script:
 - dotnet restore
 - dotnet build
 - dotnet test tests/PoC.SharpDiff.Tests/PoC.SharpDiff.Tests.csproj
-- sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.verbose=true  -X
+- sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_LOGIN -Dsonar.password=$SONAR_PASW -Dsonar.verbose=true  -X
 
 branches:
   only:
