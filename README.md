@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/jboliveira/PoC.SharpDiff.svg?token=hoKsky9xhb4rvz3jQYmq&branch=master)](https://travis-ci.com/jboliveira/PoC.SharpDiff)
 
-## Project Structure
+## Overview
 
 ```
 src
@@ -52,6 +52,10 @@ FluentValidation Packages:
 EFCore - SQLServer Packages:
 - `Microsoft.EntityFrameworkCore.SqlServer`
 - `Microsoft.EntityFrameworkCore.Design`
+
+
+### Next/Improvements
+[] ...
 
 
 [//]: #
