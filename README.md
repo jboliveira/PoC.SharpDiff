@@ -36,47 +36,44 @@ tests
 - URL: `/v1/diff/{id}/left`
 - Method: `POST`
 - URL params:
-    Required:
-    - `id=integer`
+    - `id=integer` [Required]
 - Body params: `{ "data": "string" }`
 - Content-Type: `application/json`
 - Success Response:
-    Code: 200 
-    Content: `{ "id": 0, "direction": "left", "base64String": "string"}`
+    - Code: 200 
+    - Content: `{ "id": 0, "direction": "left", "base64String": "string"}`
 - Error Response:
-    Code: 400 BAD REQUEST
+    - Code: 400 BAD REQUEST
 
 #### Endpoint: Creates the content for right side.
 - URL: `/v1/diff/{id}/right`
 - Method: `POST`
 - URL params:
-    Required:
-    - `id=integer`
+    - `id=integer` [Required]
 - Body params: `{ "data": "string" }`
 - Content-Type: `application/json`
 - Success Response:
-    Code: 200 
-    Content: `{ "id": 0, "direction": "right", "base64String": "string"}`
+    - Code: 200 
+    - Content: `{ "id": 0, "direction": "right", "base64String": "string"}`
 - Error Response:
-    Code: 400 BAD REQUEST
+    - Code: 400 BAD REQUEST
 
 #### Endpoint: Compare the specified content id and returns the differences.
 - URL: `/v1/diff/{id}`
 - Method: `GET`
 - URL params:
-    Required:
-    - `id=integer`
+    - `id=integer` [Required]
 - Content-Type: `application/json`
 - Success Response:
-    Code: 200 
-    Content: 
-    `{ "string" }` - If differences not found, just message
-    `{ { "offset": 0, "lenght": 0 } }` - If differences found
+    - Code: 200 
+    - Content: 
+        - `{ "string" }` - If differences not found, just message
+        - `{ { "offset": 0, "lenght": 0 } }` - If differences found
 - Error Response:
-    Code: 400 BAD REQUEST
+    - Code: 400 BAD REQUEST
 - Not Found Response:
-    Code: 404 NOT FOUND
-    Content: `{ "string" }`
+    - Code: 404 NOT FOUND
+    - Content: `{ "string" }`
 
 ### Next
 [ ] Include a few more tests
