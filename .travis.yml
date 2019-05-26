@@ -1,10 +1,10 @@
 ﻿language: csharp
 solution: PoC.SharpDiff.sln
-mono: latest
-dotnet: 2.2.107
-install:
-  - nuget restore PoC.SharpDiff.sln
-  - nuget install xunit.runners -Version 1.9.2 -OutputDirectory testrunner
+mono: none
+sudo: required
+dist: xenial
+dotnet: 2.2
 script:
-  - msbuild /p:Configuration=Release PoC.SharpDiff.sln
-  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./tests/Poc.SharpDiff.Tests/bin/Release/netcoreapp2.2/Poc.SharpDiff.Tests.dll
+  - dotnet restore
+  - dotnet build
+  - dotnet test tests/PoC.SharpDiff.Tests/PoC.SharpDiff.Tests.csproj
