@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.com/jboliveira/PoC.SharpDiff.svg?token=hoKsky9xhb4rvz3jQYmq&branch=master)](https://travis-ci.com/jboliveira/PoC.SharpDiff)
 
+
 ## Overview
+
 
 ### Project Structure:
 
@@ -12,6 +14,7 @@ src
 tests
  |__ PoC.SharpDiff.Tests
 ```
+
 
 ### Tech Stack:
 
@@ -27,10 +30,12 @@ tests
 - Azure SQL Server
 - xUnit
 
+
 ### API Documentation
 
 - Swagger: `{host}/swagger`
 - HealthCheck: `{host}/hc`
+
 
 #### Endpoint: Creates the content for left side.
 - URL: `/v1/diff/{id}/left`
@@ -44,7 +49,8 @@ tests
     - Content: `{ "id": 0, "direction": "left", "base64String": "string"}`
 - Error Response:
     - Code: 400 BAD REQUEST
-
+    
+    
 #### Endpoint: Creates the content for right side.
 - URL: `/v1/diff/{id}/right`
 - Method: `POST`
@@ -57,7 +63,8 @@ tests
     - Content: `{ "id": 0, "direction": "right", "base64String": "string"}`
 - Error Response:
     - Code: 400 BAD REQUEST
-
+    
+    
 #### Endpoint: Compare the specified content id and returns the differences.
 - URL: `/v1/diff/{id}`
 - Method: `GET`
@@ -74,12 +81,15 @@ tests
 - Not Found Response:
     - Code: 404 NOT FOUND
     - Content: `{ "string" }`
+    
 
 ### Next
+
 [ ] Include a few more tests
 [ ] Improve persistence layer
 [ ] Review comments and documentation
 [ ] ...
+
 
 ### Packages
 
