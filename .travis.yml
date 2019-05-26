@@ -10,11 +10,8 @@ env:
 addons:
   sonarcloud:
     organization: jboliveira-github
-    token:
-      secure: XNGgmApOyYGVcF7YIEZmvGao7WdgL3wmC5mfMWlC66BWVnoNQV1p6ioVjzEklULFkHMLBr3pkccNjCZdeHYK8IvKkz+uwL4oIcEakJDYhWxfqw7o7sAc8W7rPK8xBmcaxoE2580/6iNdh0S5Hcnp6MaxT60O5RztmrsarWEQHmCocv4DSjhz0JjkZC1sKeq9fjiym4uN+eBeAuzr+scMMnyLLQOFtRl1OwFC9GbOtPr+KKCUFNxz16Op5czfcQKf6qbodsJ9/xmJZx3OgqgwpZAmrfwGC+usVOqJlvBJQlC8pRgl3psTBrOMVX6OWj6c5XiyoC/Bh4SpYjQAmBI1svRQv9tFjj3sGXP9x9ZqnneX/JipWIwLeIKI+H5rYcIh1rc6ozzvw2TdZIPbP7pPZcpCh3gGgMqSy90eUSN2v1e2uxTSzuwT4d4KaBcDtGHfmHAPTKWEUIMyLlwaCEE0C6/MHGZYBIgAUsoak88SGczOcX2mxHYmC/X0/oZufwMUQjwU7+4Y3O3CEmQ9P1H5eCAUV4V8v+Zm53x9MTBsWepOZbTifYSpt7dVCdnm9NKQBIhbncNySf1ACHPdIWlcxJfxPqZC7d6WEN+EbtcrqYFmrbsi8kGCjb/9VhSHvEzmrPuWg0refgN4D6bqmBBC9z8jWUlgsIKPyJYOqzzUBdM=
 script:
 - dotnet restore
 - dotnet build
 - dotnet test tests/PoC.SharpDiff.Tests/PoC.SharpDiff.Tests.csproj
-- sonar-scanner
 
