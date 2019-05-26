@@ -1,0 +1,9 @@
+<Project>
+	<PropertyGroup>
+        <Authors>Jader Bueno de Oliveira</Authors>
+    	<Copyright>Copyright © 2019</Copyright>
+        <RepositoryUrl>https://github.com/jboliveira/PoC.SharpDiff</RepositoryUrl>
+        <LangVersion>7.3</LangVersion>
+        <NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+</Project>

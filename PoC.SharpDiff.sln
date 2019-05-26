@@ -7,6 +7,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F76A0A47
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.SharpDiff.WebAPI", "src\PoC.SharpDiff.WebAPI\PoC.SharpDiff.WebAPI.csproj", "{2C43F2B6-A9B2-4CBC-8A20-89BBA218B842}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1136807-2F63-4EF6-81C5-979BE0889D2B}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		global.json = global.json
+		common.props = common.props
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.SharpDiff.Tests", "tests\PoC.SharpDiff.Tests\PoC.SharpDiff.Tests.csproj", "{565F425C-4BC9-4217-ADDA-246C62AB156E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,8 +26,13 @@ Global
 		{2C43F2B6-A9B2-4CBC-8A20-89BBA218B842}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C43F2B6-A9B2-4CBC-8A20-89BBA218B842}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C43F2B6-A9B2-4CBC-8A20-89BBA218B842}.Release|Any CPU.Build.0 = Release|Any CPU
+		{565F425C-4BC9-4217-ADDA-246C62AB156E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{565F425C-4BC9-4217-ADDA-246C62AB156E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{565F425C-4BC9-4217-ADDA-246C62AB156E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{565F425C-4BC9-4217-ADDA-246C62AB156E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2C43F2B6-A9B2-4CBC-8A20-89BBA218B842} = {171EC0DA-4762-42DF-8CB8-1E798DE2C1F6}
+		{565F425C-4BC9-4217-ADDA-246C62AB156E} = {F76A0A47-7485-4879-AD43-D82DCDD7A486}
 	EndGlobalSection
 EndGlobal
