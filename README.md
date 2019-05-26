@@ -109,11 +109,13 @@ tests
 
 ### Next
 
-- Include a few more tests
+- Include more tests
 - Improve persistence layer and models
 - Review comments and documentation
-- Use Docker/Docker Compose for database/SQLServer
-- WIP
+- Use Docker/Docker Compose for database/SQLServer 
+- Capture application logs via third-party service
+- Create a Watchdog UI to watch health and report about the API
+- WIP :rocket:
 
 
 ### Packages
