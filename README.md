@@ -13,10 +13,45 @@ tests
 
 ### Tech Stack
 
-- ![VS2019](https://img.shields.io/badge/Visual_Studio_2019-v16.1.0-green.svg);
-- ![.NET SDK](https://img.shields.io/badge/.NET_SDK-v2.2.107-green.svg);
-- ![.NET Core](https://img.shields.io/badge/.NET_Core-v2.2-green.svg);
-- ![CSharp](https://img.shields.io/badge/CSharp-v7.3-green.svg);
+- Visual Studio 2019 (Mac/Win)
+- .NET Core 2.2
+- CSharp 7.3
+- Entity Framework Core (for data access)
+- Entity Framework In-Memory Provider (for testing purposes)
+- HealthCheck
+- Swagger
+- Serilog
+- FluentValidation
+- Azure SQL Server
+- xUnit
+
+#### Packages
+
+HealthChecks Packages:
+- `Microsoft.Extensions.Diagnostics.HealthChecks`
+- `AspNetCore.HealthChecks.UI.Client`
+- `AspNetCore.HealthChecks.SqlServer`
+
+API Versioning Packages: 
+- `Microsoft.AspNetCore.Mvc.Versioning`
+- `Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer`
+
+Swagger Packages:
+- `Swashbuckle.AspNetCore`
+- `Microsoft.AspNetCore.StaticFiles`
+
+Logging Packages:
+- `Serilog.AspNetCore`
+- `Serilog.Settings.Configuration`
+- `Serilog.Sinks.Console`
+
+FluentValidation Packages:
+- `FluentValidation.AspNetCore`
+- `MicroElements.Swashbuckle.FluentValidation`
+
+EFCore - SQLServer Packages:
+- `Microsoft.EntityFrameworkCore.SqlServer`
+- `Microsoft.EntityFrameworkCore.Design`
 
 
 [//]: #
