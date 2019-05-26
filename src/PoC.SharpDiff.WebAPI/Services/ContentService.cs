@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using PoC.SharpDiff.WebAPI.Domain.Helpers;
 using PoC.SharpDiff.WebAPI.Domain.Models;
 using PoC.SharpDiff.WebAPI.Domain.Repositories;
 using PoC.SharpDiff.WebAPI.Domain.Services;
@@ -90,11 +89,26 @@ namespace PoC.SharpDiff.WebAPI.Services
 				return new ContentDiffResponse("Content left and right contains different sizes.");
 			}
 
-			var diffs = ContentHelper.Compare(contentLeft, contentRight);
+			var differences = new List<ContentDiff>();
 
-			if (diffs.Any())
+			for (int i = 0; i < contentLeft.Length; i++)
 			{
-				return new ContentDiffResponse(diffs.ToList());
+				if (contentLeft[i] != contentRight[i])
+				{
+					int j = i;
+
+					while ((contentLeft[j] != contentRight[j]) && j++ < contentLeft.Length - 1)
+						continue;
+
+					differences.Add(new ContentDiff(i, j - i));
+
+					i = j;
+				}
+			}
+
+			if (differences.Count > 0)
+			{
+				return new ContentDiffResponse(differences);
 			}
 
 			return new ContentDiffResponse("Content left and right are equal.");
