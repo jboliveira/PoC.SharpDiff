@@ -15,67 +15,67 @@ using PoC.SharpDiff.WebAPI.Services;
 
 namespace PoC.SharpDiff.WebAPI
 {
-	/// <summary> API Startup class </summary>
-	public class Startup
-	{
-		public IConfiguration Configuration { get; }
-		public IHostingEnvironment CurrentEnvironment { get; }
+    /// <summary> API Startup class </summary>
+    public class Startup
+    {
+        public IConfiguration Configuration { get; }
+        public IHostingEnvironment CurrentEnvironment { get; }
 
-		public Startup(IConfiguration configuration, IHostingEnvironment currentEnvironment)
-		{
-			Configuration = configuration;
-			CurrentEnvironment = currentEnvironment;
-		}
+        public Startup(IConfiguration configuration, IHostingEnvironment currentEnvironment)
+        {
+            Configuration = configuration;
+            CurrentEnvironment = currentEnvironment;
+        }
 
-		/// <summary> This method gets called by the runtime in order to add services to the container. </summary>
-		public void ConfigureServices(IServiceCollection services)
-		{
-			var connString = Configuration.GetConnectionString("SharpDiffDatabase");
+        /// <summary> This method gets called by the runtime in order to add services to the container. </summary>
+        public void ConfigureServices(IServiceCollection services)
+        {
+            var connString = Configuration.GetConnectionString("SharpDiffDatabase");
 
-			services.AddCustomDbContext(connString, CurrentEnvironment.IsEnvironment("Testing"));
-			services.AddCustomHealthCheck(connString);
-			services.AddCustomMvcCore();
-			services.AddCustomApiVersioning();
-			services.AddCustomSwagger();
-			services.AddCors();
-			services.AddOptions();
+            services.AddCustomDbContext(connString, CurrentEnvironment.IsEnvironment("Testing"));
+            services.AddCustomHealthCheck(connString);
+            services.AddCustomMvcCore();
+            services.AddCustomApiVersioning();
+            services.AddCustomSwagger();
+            //services.AddCors();
+            services.AddOptions();
 
-			RegisterServices(services);
-		}
+            RegisterServices(services);
+        }
 
-		/// <summary> This method gets called by the runtime in order to configure the HTTP request pipeline. </summary>
-		public void Configure(IApplicationBuilder app)
-		{
-			app.UseCustomHealthChecks();
+        /// <summary> This method gets called by the runtime in order to configure the HTTP request pipeline. </summary>
+        public void Configure(IApplicationBuilder app)
+        {
+            app.UseCustomHealthChecks();
 
-			if (CurrentEnvironment.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-				app.UseCustomCors();
-			}
-			else
-			{
-				// See https://aka.ms/aspnetcore-hsts
-				app.UseHsts();
-			}
+            if (CurrentEnvironment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                //app.UseCustomCors();
+            }
+            else
+            {
+                // See https://aka.ms/aspnetcore-hsts
+                app.UseHsts();
+            }
+            
+            app.UseHttpsRedirection();
+            app.UseApiVersioning();
+            app.UseStaticFiles();
+            app.UseCustomSwagger();
+            app.UseMvc();
+            app.UseWelcomePage();
+        }
 
-			app.UseHttpsRedirection();
-			app.UseApiVersioning();
-			app.UseStaticFiles();
-			app.UseCustomSwagger();
-			app.UseMvc();
-			app.UseWelcomePage();
-		}
+        /// <summary>
+        /// .NET Native DI
+        /// </summary>
+        private static void RegisterServices(IServiceCollection services)
+        {
+            services.AddScoped<IContentRepository, ContentRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-		/// <summary>
-		/// .NET Native DI
-		/// </summary>
-		private static void RegisterServices(IServiceCollection services)
-		{
-			services.AddScoped<IContentRepository, ContentRepository>();
-			services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-			services.AddScoped<IContentService, ContentService>();
-		}
-	}
+            services.AddScoped<IContentService, ContentService>();
+        }
+    }
 }
