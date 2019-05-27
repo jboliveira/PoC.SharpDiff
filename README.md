@@ -12,7 +12,7 @@
 src
  |__ PoC.SharpDiff.WebAPI
 tests
- |__ PoC.SharpDiff.Tests
+ |__ PoC.SharpDiff.Tests (order Test Explorer by Traits)
 ```
 
 

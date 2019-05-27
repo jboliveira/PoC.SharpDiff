@@ -20,12 +20,12 @@ namespace PoC.SharpDiff.Tests.TestUtilities
             return bodyData;
         }
 
-        private static string CreateDataFromUnicodeString(this string str)
+        public static string CreateDataFromUTF8String(this string str)
         {
             string base64EncodedData = null;
             if (str != null)
             {
-                var bytes = Encoding.Unicode.GetBytes(str);
+                var bytes = Encoding.UTF8.GetBytes(str);
                 base64EncodedData = Convert.ToBase64String(bytes);
             }
 
