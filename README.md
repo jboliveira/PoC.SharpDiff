@@ -109,7 +109,7 @@ tests
 
 ### Next
 
-- Include more tests
+- Include/Improve test layer with a better code coverage
 - Improve persistence layer and models
 - Review comments and documentation
 - Use Docker/Docker Compose for database/SQLServer 
@@ -117,6 +117,7 @@ tests
 - Create a Watchdog UI to watch health and report about the API
 - Add Postman collection and environment
 - Add a Vault service to manage secrets and protect sensitive data
+- Create a list of constraints for messages
 - WIP :rocket:
 
 
