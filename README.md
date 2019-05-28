@@ -24,8 +24,14 @@
 ```
 src
  |__ PoC.SharpDiff.WebAPI
-tests
- |__ PoC.SharpDiff.Tests (order Test Explorer by Traits)
+ |__ PoC.SharpDiff.Domain
+ |__ PoC.SharpDiff.Persistence
+ |__ PoC.SharpDiff.Resources
+tests (order Test Explorer by Traits)
+ |__ PoC.SharpDiff.TestUtilities
+ |__ PoC.SharpDiff.Resources.Tests (unit)
+ |__ PoC.SharpDiff.WebAPI.Tests (unit)
+ |__ PoC.SharpDiff.Tests (integration)
 ```
 
 
