@@ -1,27 +1,24 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using PoC.SharpDiff.Domain.Models;
 using PoC.SharpDiff.Domain.Services;
 using PoC.SharpDiff.Resources;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace PoC.SharpDiff.WebAPI.Controllers
 {
-    /// <summary> Diff Controller </summary>
-    [ApiVersion("1.0")]
+	/// <summary> Diff Controller </summary>
+	[ApiVersion("1.0")]
     [Route("v{version:apiVersion}/[controller]")]
     public class DiffController : ControllerBase
     {
         private readonly IContentService _contentService;
-        private readonly ILogger<DiffController> _logger;
 
-        public DiffController(IContentService contentService, ILogger<DiffController> logger)
+        public DiffController(IContentService contentService)
         {
             _contentService = contentService ?? throw new ArgumentNullException(nameof(contentService));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         /// <summary>
