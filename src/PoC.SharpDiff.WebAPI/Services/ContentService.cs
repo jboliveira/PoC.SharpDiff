@@ -36,7 +36,7 @@ namespace PoC.SharpDiff.WebAPI.Services
         {
             if (content == null)
             {
-                return new ContentResponse($"'Content' should not be null.");
+                return new ContentResponse("'Content' should not be null.");
             }
 
             var result = await GetContentAsync(content.Id, content.Direction);

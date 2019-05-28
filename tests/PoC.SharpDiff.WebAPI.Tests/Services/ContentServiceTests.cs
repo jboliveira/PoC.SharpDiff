@@ -271,6 +271,9 @@ namespace PoC.SharpDiff.WebAPI.Tests
             Assert.True(diff.Length == 2);
         }
 
+		/// <summary>
+		/// The setup content service.
+		/// </summary>
         private static readonly Func<Content, ContentService> SetupContentService = (contentReturn) =>
         {
             var stubContentRepository = new Mock<IContentRepository>();
@@ -282,6 +285,9 @@ namespace PoC.SharpDiff.WebAPI.Tests
             return new ContentService(stubContentRepository.Object, stubUnitOfWork.Object);
         };
 
+		/// <summary>
+		/// The setup content service exception.
+		/// </summary>
         private static readonly Func<Content, ContentService> SetupContentServiceException = (contentReturn) =>
         {
             var stubContentRepository = new Mock<IContentRepository>();
