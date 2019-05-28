@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <Import Project="..\..\common.props" />
 
@@ -28,14 +28,16 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.4.0" />
     <PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="2.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
     <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Domain\" />
-    <Folder Include="Domain\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PoC.SharpDiff.Domain\PoC.SharpDiff.Domain.csproj" />
+    <ProjectReference Include="..\PoC.SharpDiff.Persistence\PoC.SharpDiff.Persistence.csproj" />
+    <ProjectReference Include="..\PoC.SharpDiff.Resources\PoC.SharpDiff.Resources.csproj" />
   </ItemGroup>
 </Project>

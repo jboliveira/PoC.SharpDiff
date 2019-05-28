@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace PoC.SharpDiff.WebAPI.Infrastructure.Extensions
 {
-	/// <summary> Application Builder Extensions  </summary>
-	public static class ApplicationBuilderExtensions
+    /// <summary> Application Builder Extensions  </summary>
+    public static class ApplicationBuilderExtensions
     {
         /// <summary> Adds a HealthCheck middleware into the pipeline. </summary>
         /// <param name="app">IApplicationBuilder dependency</param>

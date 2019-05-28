@@ -1,117 +1,121 @@
-﻿using System;
+﻿using PoC.SharpDiff.Domain.Models;
+using PoC.SharpDiff.Domain.Repositories;
+using PoC.SharpDiff.Domain.Services;
+using PoC.SharpDiff.Domain.Services.Responses;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using PoC.SharpDiff.WebAPI.Domain.Models;
-using PoC.SharpDiff.WebAPI.Domain.Repositories;
-using PoC.SharpDiff.WebAPI.Domain.Services;
-using PoC.SharpDiff.WebAPI.Domain.Services.Responses;
 
 namespace PoC.SharpDiff.WebAPI.Services
 {
-	/// <summary>
-	/// Service to handle Content operations
-	/// </summary>
-	public class ContentService : IContentService
-	{
-		private readonly IContentRepository _contentRepository;
-		private readonly IUnitOfWork _unitOfWork;
+    /// <summary>
+    /// Service to handle Content operations
+    /// </summary>
+    public class ContentService : IContentService
+    {
+        private readonly IContentRepository _contentRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:PoC.SharpDiff.WebAPI.Services.ContentService"/> class.
-		/// </summary>
-		/// <param name="contentRepository">Content repository.</param>
-		/// <param name="unitOfWork">Unit of work.</param>
-		public ContentService(IContentRepository contentRepository, IUnitOfWork unitOfWork)
-		{
-			_contentRepository = contentRepository ?? throw new ArgumentNullException(nameof(contentRepository));
-			_unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:PoC.SharpDiff.WebAPI.Services.ContentService"/> class.
+        /// </summary>
+        /// <param name="contentRepository">Content repository.</param>
+        /// <param name="unitOfWork">Unit of work.</param>
+        public ContentService(IContentRepository contentRepository, IUnitOfWork unitOfWork)
+        {
+            _contentRepository = contentRepository ?? throw new ArgumentNullException(nameof(contentRepository));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+        }
 
-		/// <summary>
-		/// Upserts the content async.
-		/// </summary>
-		/// <returns>The content response async.</returns>
-		/// <param name="content">Content.</param>
-		public async Task<ContentResponse> UpsertContentAsync(Content content)
-		{
-			var result = await GetContentAsync(content.Id, content.Direction);
+        /// <summary>
+        /// Upserts the content async.
+        /// </summary>
+        /// <returns>The content response async.</returns>
+        /// <param name="content">Content.</param>
+        public async Task<ContentResponse> UpsertContentAsync(Content content)
+        {
+            if (content == null)
+            {
+                return new ContentResponse($"'Content' should not be null.");
+            }
 
-			try 
-			{
-				if (result.Success)
-				{
-					result.Content.Base64String = content.Base64String;
-					_contentRepository.Update(result.Content);
-				}
-				else
-				{
-					await _contentRepository.AddAsync(content);
-				}
+            var result = await GetContentAsync(content.Id, content.Direction);
 
-				await _unitOfWork.CommitAsync();
+            try
+            {
+                if (result.Success)
+                {
+                    result.Content.Base64String = content.Base64String;
+                    _contentRepository.Update(result.Content);
+                }
+                else
+                {
+                    await _contentRepository.AddAsync(content);
+                }
 
-				return new ContentResponse(content);
-			}
-			catch(Exception ex)
-			{
-				return new ContentResponse($"An error occurred when saving the content: {ex.Message}");
-			}
-		}
+                await _unitOfWork.CommitAsync();
 
-		/// <summary>
-		/// Gets the content async.
-		/// </summary>
-		/// <returns>The content response async.</returns>
-		/// <param name="id">Identifier.</param>
-		/// <param name="direction">Direction.</param>
-		public async Task<ContentResponse> GetContentAsync(int id, ContentDirection direction)
-		{
-			var content = await _contentRepository.GetContentAsync(id, direction);
+                return new ContentResponse(content);
+            }
+            catch (Exception ex)
+            {
+                return new ContentResponse($"An error occurred when saving the content: {ex.Message}");
+            }
+        }
 
-			if (content == null)
-			{
-				return new ContentResponse($"Content {direction} {id} not found.");
-			}
+        /// <summary>
+        /// Gets the content async.
+        /// </summary>
+        /// <returns>The content response async.</returns>
+        /// <param name="id">Identifier.</param>
+        /// <param name="direction">Direction.</param>
+        public async Task<ContentResponse> GetContentAsync(int id, ContentDirection direction)
+        {
+            var content = await _contentRepository.GetContentAsync(id, direction);
 
-			return new ContentResponse(content);
-		}
+            if (content == null)
+            {
+                return new ContentResponse($"Content {direction} {id} not found.");
+            }
 
-		/// <summary>
-		/// Compares the contents.
-		/// </summary>
-		/// <returns>The contents.</returns>
-		/// <param name="contentLeft">Content left.</param>
-		/// <param name="contentRight">Content right.</param>
-		public ContentDiffResponse CompareContents(byte[] contentLeft, byte[] contentRight)
-		{
-			if (contentLeft.Length != contentRight.Length)
-			{
-				return new ContentDiffResponse("Content left and right contains different sizes.");
-			}
+            return new ContentResponse(content);
+        }
 
-			var differences = new List<ContentDiff>();
+        /// <summary>
+        /// Compares the contents.
+        /// </summary>
+        /// <returns>The contents.</returns>
+        /// <param name="contentLeft">Content left.</param>
+        /// <param name="contentRight">Content right.</param>
+        public ContentDiffResponse CompareContents(byte[] contentLeft, byte[] contentRight)
+        {
+            if (contentLeft.Length != contentRight.Length)
+            {
+                return new ContentDiffResponse("Content left and right contains different sizes.");
+            }
 
-			for (int i = 0; i < contentLeft.Length; i++)
-			{
-				if (contentLeft[i] != contentRight[i])
-				{
-					int j = i;
+            var differences = new List<ContentDiff>();
 
-					while ((contentLeft[j] != contentRight[j]) && j++ < contentLeft.Length - 1)
-						continue;
+            for (int i = 0; i < contentLeft.Length; i++)
+            {
+                if (contentLeft[i] != contentRight[i])
+                {
+                    int j = i;
 
-					differences.Add(new ContentDiff(i, j - i));
+					while ((contentLeft[j] != contentRight[j]) && j++ < contentLeft.Length - 1) { }
 
-					i = j;
-				}
-			}
+                    differences.Add(new ContentDiff(i, j - i));
 
-			if (differences.Count > 0)
-			{
-				return new ContentDiffResponse(differences);
-			}
+                    i = j;
+                }
+            }
 
-			return new ContentDiffResponse("Content left and right are equal.");
-		}
-	}
+            if (differences.Count > 0)
+            {
+                return new ContentDiffResponse(differences);
+            }
+
+            return new ContentDiffResponse("Content left and right are equal.");
+        }
+    }
 }

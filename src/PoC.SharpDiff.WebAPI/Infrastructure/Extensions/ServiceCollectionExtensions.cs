@@ -1,5 +1,4 @@
-﻿using System.Net.Mime;
-using FluentValidation.AspNetCore;
+﻿using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using PoC.SharpDiff.WebAPI.Persistence.Contexts;
+using PoC.SharpDiff.Persistence.Contexts;
+using System.Net.Mime;
 
 namespace PoC.SharpDiff.WebAPI.Infrastructure.Extensions
 {
@@ -47,11 +47,13 @@ namespace PoC.SharpDiff.WebAPI.Infrastructure.Extensions
         /// <param name="services">IServiceCollection dependency</param>
         public static void AddCustomMvcCore(this IServiceCollection services)
         {
-            services.AddMvc(options =>
+            services.AddMvcCore(options =>
             {
                 // Apply filter globally to force response in JSON format.
                 options.Filters.Add(new ProducesAttribute(MediaTypeNames.Application.Json));
             })
+            .AddApiExplorer()
+            .AddJsonFormatters()
             .AddJsonOptions(options =>
             {
                 // Suppress properties with null value.

@@ -1,6 +1,8 @@
 # PoC.SharpDiff
 
 [![Build Status](https://travis-ci.com/jboliveira/PoC.SharpDiff.svg?token=hoKsky9xhb4rvz3jQYmq&branch=master)](https://travis-ci.com/jboliveira/PoC.SharpDiff)
+[![Coverage Status](https://coveralls.io/repos/github/jboliveira/PoC.SharpDiff/badge.svg)](https://coveralls.io/github/jboliveira/PoC.SharpDiff)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aea87107017c4c3b8d52b760b32970be)](https://www.codacy.com/app/jader.oliveira/PoC.SharpDiff?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jboliveira/PoC.SharpDiff&amp;utm_campaign=Badge_Grade)
 
 
 ## Overview

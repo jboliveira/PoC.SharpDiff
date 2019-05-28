@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using PoC.SharpDiff.Domain.Models;
+using PoC.SharpDiff.Domain.Services;
+using PoC.SharpDiff.Resources;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PoC.SharpDiff.WebAPI.Domain.Models;
-using PoC.SharpDiff.WebAPI.Domain.Services;
-using PoC.SharpDiff.WebAPI.Resources;
-using Microsoft.Extensions.Logging;
 
 namespace PoC.SharpDiff.WebAPI.Controllers
 {
