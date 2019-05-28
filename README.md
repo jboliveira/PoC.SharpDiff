@@ -1,12 +1,18 @@
 # PoC.SharpDiff
 
 [![Build Status](https://travis-ci.com/jboliveira/PoC.SharpDiff.svg?token=hoKsky9xhb4rvz3jQYmq&branch=master)](https://travis-ci.com/jboliveira/PoC.SharpDiff)
-![Sonar Quality Gate](https://img.shields.io/sonar/https/sonarcloud.io/jboliveira_PoC.SharpDiff/quality_gate.svg)
-![Sonar Coverage](https://img.shields.io/sonar/https/sonarcloud.io/jboliveira_PoC.SharpDiff/coverage.svg)
-![Sonar Violations (long format)](https://img.shields.io/sonar/https/sonarcloud.io/jboliveira_PoC.SharpDiff/violations.svg?format=long)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=alert_status)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=security_rating)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
+
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=coverage)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=code_smells)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=sqale_index)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/jboliveira/PoC.SharpDiff.svg)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/jboliveira/PoC.SharpDiff.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/jboliveira/PoC.SharpDiff.svg)
 
 
