@@ -1,0 +1,44 @@
+# http://editorconfig.org
+root = true
+
+# All files
+[*]
+charset                                                           = utf-8
+indent_style                                                      = space
+indent_size                                                       = 2
+insert_final_newline                                              = true
+trim_trailing_whitespace                                          = true
+
+#########################
+# File Extension Settings
+#########################
+
+# Visual Studio Solution Files
+[*.sln]
+indent_style                                                      = tab
+
+# Visual Studio XML Project Files
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
+indent_size                                                       = 2
+
+# Code files
+[*.{cs,csx,vb,vbx}]
+indent_size                                                       = 4
+charset                                                           = utf-8-bom
+
+# XML Configuration Files
+[*.{xml,config,props,targets,nuspec,resx,ruleset,vsixmanifest,vsct}]
+indent_size                                                       = 2
+
+[.yml]
+indent_style                                                      = space
+indent_size                                                       = 2
+end_of_line                                                       = lf
+charset                                                           = utf-8
+trim_trailing_whitespace                                          = true
+insert_final_newline                                              = true
+
+# Markdown Files
+[*.md]
+max_line_length                                                   = off
+trim_trailing_whitespace                                          = false

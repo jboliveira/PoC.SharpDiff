@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+    sql.data:
+        image: microsoft/mssql-server-linux:2017-latest
+        environment:
+            ACCEPT_EULA: Y
+            SA_PASSWORD: "@Priority!1"
+            MSSQL_PID: Developer
+            MSSQL_DB: SharpDiffDb
+        ports:
+            - "1433:1433"
+
+    sharpdiff.api:
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+        build: 
+            context: .
+            dockerfile: src/PoC.SharpDiff.WebAPI/Dockerfile
+        ports:
+            - "8000:80"
+        depends_on:
+            - sql.data

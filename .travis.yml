@@ -18,5 +18,5 @@ before_install:
   - bash ./tools/travis-install-dependencies.sh
 
 script:
-- git fetch --unshallow || true
-- bash ./tools/travis-build.sh
+  - git fetch --unshallow || true
+  - bash ./tools/travis-build.sh
