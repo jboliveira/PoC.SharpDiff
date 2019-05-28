@@ -48,6 +48,9 @@ tests (order Test Explorer by Traits)
 - FluentValidation
 - Azure SQL Server
 - xUnit
+- Docker
+- TravisCI
+- SonarCloud
 
 
 ### Installing and Running
@@ -59,18 +62,12 @@ tests (order Test Explorer by Traits)
     #Access Project Root Folder
     cd PoC.SharpDiff
     
-    #Access API folder
-    cd src/PoC.SharpDiff
-
-    #Build and Restore packages
-    dotnet restore
-    dotnet build
-
-    #Run API
-    dotnet run
+    #Build and Run
+    docker-compose build
+    docker-compose up
 
     #Access through address:
-    https://localhost:5001/swagger
+    https://localhost:8000/swagger
 ```
 
 
@@ -128,16 +125,15 @@ tests (order Test Explorer by Traits)
 
 ### Next
 
-- Include/Improve test layer with a better code coverage
-- Improve persistence layer and models
-- Review comments and documentation
-- Use Docker/Docker Compose for database/SQLServer 
-- Capture application logs via third-party service
-- Create a Watchdog UI to watch health and report about the API
-- Add Postman collection and environment
-- Add a Vault service to manage secrets and protect sensitive data
-- Create a list of constraints for messages
-- WIP :rocket:
+[X] Include/Improve test layer with a better code coverage
+[X] Review comments and documentation
+[X] Use Docker/Docker Compose for database/SQLServer
+[ ] Improve persistence layer and models
+[ ] Add Postman collection and environment
+[ ] Create a Watchdog UI to watch health and report about the API
+[ ] Capture application logs via third-party service
+[ ] Add a Vault service to manage secrets and protect sensitive data
+[ ] WIP :rocket:
 
 
 ### Packages
