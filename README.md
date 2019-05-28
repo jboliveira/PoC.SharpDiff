@@ -1,8 +1,13 @@
 # PoC.SharpDiff
 
 [![Build Status](https://travis-ci.com/jboliveira/PoC.SharpDiff.svg?token=hoKsky9xhb4rvz3jQYmq&branch=master)](https://travis-ci.com/jboliveira/PoC.SharpDiff)
-[![Coverage Status](https://coveralls.io/repos/github/jboliveira/PoC.SharpDiff/badge.svg)](https://coveralls.io/github/jboliveira/PoC.SharpDiff)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aea87107017c4c3b8d52b760b32970be)](https://www.codacy.com/app/jader.oliveira/PoC.SharpDiff?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jboliveira/PoC.SharpDiff&amp;utm_campaign=Badge_Grade)
+![Sonar Quality Gate](https://img.shields.io/sonar/https/sonarcloud.io/jboliveira_PoC.SharpDiff/quality_gate.svg)
+![Sonar Coverage](https://img.shields.io/sonar/https/sonarcloud.io/jboliveira_PoC.SharpDiff/coverage.svg)
+![Sonar Violations (long format)](https://img.shields.io/sonar/https/sonarcloud.io/jboliveira_PoC.SharpDiff/violations.svg?format=long)
+
+![GitHub repo size](https://img.shields.io/github/repo-size/jboliveira/PoC.SharpDiff.svg)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/jboliveira/PoC.SharpDiff.svg)
+![GitHub last commit](https://img.shields.io/github/last-commit/jboliveira/PoC.SharpDiff.svg)
 
 
 ## Overview
