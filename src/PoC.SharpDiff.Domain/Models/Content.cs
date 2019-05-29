@@ -11,13 +11,19 @@
         /// Initializes a new instance of the <see cref="Content"/> class.
         /// </summary>
         /// <param name="id">Identifier.</param>
-        /// <param name="direction">Direction LEFT/RIGHT.</param>
-        /// <param name="base64String">Base64 string.</param>
-        public Content(int id, ContentDirection direction, string base64String)
+        public Content(int id)
         {
             Id = id;
-            Direction = direction;
-            Base64String = base64String;
+        }
+
+        public void SetLeftContent(string data)
+        {
+            LeftContentData = data;
+        }
+
+        public void SetRightContent(string data)
+        {
+            RightContentData = data;
         }
 
         /// <summary>
@@ -26,13 +32,13 @@
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the direction.
+        /// Gets or sets the left content data
         /// </summary>
-        public ContentDirection Direction { get; set; }
+        public string LeftContentData { get; set; }
 
         /// <summary>
-        /// Gets or sets the base64 string.
+        /// Gets or sets the right content data
         /// </summary>
-        public string Base64String { get; set; }
+        public string RightContentData { get; set; }
     }
 }

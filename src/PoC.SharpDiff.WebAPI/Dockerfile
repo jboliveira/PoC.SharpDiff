@@ -12,7 +12,7 @@ COPY tools/database-update.sh /app/
 COPY . .
 WORKDIR /src/src/PoC.SharpDiff.WebAPI
 RUN dotnet restore
-RUN dotnet publish -c Debug -o /app
+RUN dotnet publish -c Release -o /app
 
 FROM build AS publish
 

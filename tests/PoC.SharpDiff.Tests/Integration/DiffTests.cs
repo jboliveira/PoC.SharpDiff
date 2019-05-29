@@ -15,18 +15,22 @@ namespace PoC.SharpDiff.Tests
     [Trait("Category", "Integration")]
     public class DiffTests : IClassFixture<TestFixture<Startup>>
     {
-        private HttpClient Client;
+        private readonly HttpClient Client;
 
         public DiffTests(TestFixture<Startup> fixture)
         {
             Client = fixture.Client;
         }
 
-        private async Task<HttpResponseMessage> CreateContentAsync(Content content)
+        private async Task<HttpResponseMessage> CreateContentAsync(Content content, ContentDirection direction)
         {
-            CreateContentResource resource = new CreateContentResourceBuilder().WithData(content.Base64String).Build();
+            CreateContentResource resource = new CreateContentResourceBuilder().WithData(content.LeftContentData).Build();
+            if(direction == ContentDirection.Right)
+            {
+                resource = new CreateContentResourceBuilder().WithData(content.RightContentData).Build();
+            }
 
-            var url = $"/v1/diff/{content.Id}/{content.Direction}";
+            var url = $"/v1/diff/{content.Id}/{direction}";
             var response = await Client.PostAsync(url, resource.ToStringContent());
             return response;
         }
@@ -37,10 +41,10 @@ namespace PoC.SharpDiff.Tests
             // Arrange
             const int id = 1;
             const ContentDirection direction = ContentDirection.Left;
-            Content expectedContent = new ContentBuilder().WithId(id).WithDirection(direction).Build();
+            Content expectedContent = new ContentBuilder().WithId(id).Build();
 
             // Act
-            var response = await CreateContentAsync(expectedContent);
+            var response = await CreateContentAsync(expectedContent, direction).ConfigureAwait(false);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -50,8 +54,7 @@ namespace PoC.SharpDiff.Tests
             var content = JsonConvert.DeserializeObject<Content>(responseAsString);
 
             Assert.Equal(id, content.Id);
-            Assert.Equal(direction, content.Direction);
-            Assert.Equal(expectedContent.Base64String, content.Base64String);
+            Assert.Equal(expectedContent.LeftContentData, content.LeftContentData);
         }
 
         [Fact]
@@ -60,10 +63,10 @@ namespace PoC.SharpDiff.Tests
             // Arrange
             const int id = 1;
             const ContentDirection direction = ContentDirection.Right;
-            Content expectedContent = new ContentBuilder().WithId(id).WithDirection(direction).Build();
+            Content expectedContent = new ContentBuilder().WithId(id).Build();
 
             // Act
-            var response = await CreateContentAsync(expectedContent);
+            var response = await CreateContentAsync(expectedContent, direction).ConfigureAwait(false);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -73,8 +76,7 @@ namespace PoC.SharpDiff.Tests
             var content = JsonConvert.DeserializeObject<Content>(responseAsString);
 
             Assert.Equal(id, content.Id);
-            Assert.Equal(direction, content.Direction);
-            Assert.Equal(expectedContent.Base64String, content.Base64String);
+            Assert.Equal(expectedContent.RightContentData, content.RightContentData);
         }
 
         [Fact]
@@ -82,16 +84,14 @@ namespace PoC.SharpDiff.Tests
         {
             // Arrange
             const int id = 1;
-            const ContentDirection direction = ContentDirection.Right;
             const string base64String = "xyz";
             Content content = new ContentBuilder()
                 .WithId(id)
-                .WithDirection(direction)
-                .WithBase64String(base64String)
+                .WithLeftContent(base64String)
                 .Build();
 
             // Act
-            var response = await CreateContentAsync(content);
+            var response = await CreateContentAsync(content, ContentDirection.Left).ConfigureAwait(false);
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -102,11 +102,11 @@ namespace PoC.SharpDiff.Tests
         {
             // Arrange
             const int id = 1;
-            Content content1 = new ContentBuilder().WithId(id).WithDirection(ContentDirection.Left).Build();
-            Content content2 = new ContentBuilder().WithId(id).WithDirection(ContentDirection.Right).Build();
+            Content content1 = new ContentBuilder().WithId(id).Build();
+            Content content2 = new ContentBuilder().WithId(id).Build();
 
-            await CreateContentAsync(content1);
-            await CreateContentAsync(content2);
+            await CreateContentAsync(content1, ContentDirection.Left).ConfigureAwait(false);
+            await CreateContentAsync(content2, ContentDirection.Right).ConfigureAwait(false);
 
             // Act
             var response = await Client.GetAsync($"/v1/diff/{id}");
@@ -125,18 +125,16 @@ namespace PoC.SharpDiff.Tests
             const int id = 1;
             Content content1 = new ContentBuilder()
                 .WithId(id)
-                .WithDirection(ContentDirection.Left)
-                .WithBase64String("BilacSP".ConvertToBase64FromUTF8String())
+                .WithLeftContent("BilacSP".ConvertToBase64FromUTF8String())
                 .Build();
 
             Content content2 = new ContentBuilder()
                 .WithId(id)
-                .WithDirection(ContentDirection.Right)
-                .WithBase64String("SalvadorBahiaBrazil".ConvertToBase64FromUTF8String())
+                .WithRightContent("SalvadorBahiaBrazil".ConvertToBase64FromUTF8String())
                 .Build();
 
-            await CreateContentAsync(content1);
-            await CreateContentAsync(content2);
+            await CreateContentAsync(content1, ContentDirection.Left).ConfigureAwait(false);
+            await CreateContentAsync(content2, ContentDirection.Right).ConfigureAwait(false);
 
             // Act
             var response = await Client.GetAsync($"/v1/diff/{id}");
@@ -155,18 +153,16 @@ namespace PoC.SharpDiff.Tests
             const int id = 1;
             Content content1 = new ContentBuilder()
                 .WithId(id)
-                .WithDirection(ContentDirection.Left)
-                .WithBase64String("BilacSP".ConvertToBase64FromUTF8String())
+                .WithLeftContent("BilacSP".ConvertToBase64FromUTF8String())
                 .Build();
 
             Content content2 = new ContentBuilder()
                 .WithId(id)
-                .WithDirection(ContentDirection.Right)
-                .WithBase64String("BilakRP".ConvertToBase64FromUTF8String())
+                .WithRightContent("BilakRP".ConvertToBase64FromUTF8String())
                 .Build();
 
-            await CreateContentAsync(content1);
-            await CreateContentAsync(content2);
+            await CreateContentAsync(content1, ContentDirection.Left).ConfigureAwait(false);
+            await CreateContentAsync(content2, ContentDirection.Right).ConfigureAwait(false);
 
             // Act
             var response = await Client.GetAsync($"/v1/diff/{id}");

@@ -4,11 +4,12 @@ sudo: required
 dist: xenial
 dotnet: 2.2
 mono: none
+jdk: openjdk10
 
-branches:
-  only:
-    - master
-    - dev
+#branches:
+#  only:
+#    - master
+#    - dev
 
 addons:
   sonarcloud:

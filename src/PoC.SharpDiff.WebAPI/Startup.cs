@@ -58,7 +58,7 @@ namespace PoC.SharpDiff.WebAPI
                 // See https://aka.ms/aspnetcore-hsts
                 app.UseHsts();
             }
-            
+
             app.UseHttpsRedirection();
             app.UseApiVersioning();
             app.UseStaticFiles();

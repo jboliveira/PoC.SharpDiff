@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/jboliveira/PoC.SharpDiff.svg?token=hoKsky9xhb4rvz3jQYmq&branch=master)](https://travis-ci.com/jboliveira/PoC.SharpDiff)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aea87107017c4c3b8d52b760b32970be)](https://www.codacy.com/app/jader.oliveira/PoC.SharpDiff?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jboliveira/PoC.SharpDiff&amp;utm_campaign=Badge_Grade)
+
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=alert_status)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
@@ -128,7 +130,7 @@ tests (order Test Explorer by Traits)
 - [x] Include/Improve test layer with a better code coverage
 - [x] Review comments and documentation
 - [x] Use Docker/Docker Compose for database/SQLServer
-- [ ] Improve persistence layer and models
+- [x] Improve persistence layer and models
 - [ ] Add Postman collection and environment
 - [ ] Create a Watchdog UI to watch health and report about the API
 - [ ] Capture application logs via third-party service

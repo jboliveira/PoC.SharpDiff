@@ -8,19 +8,19 @@ namespace PoC.SharpDiff.Persistence.Contexts
     /// SharpDiff dbcontext.
     /// </summary>
     public class SharpDiffDbContext : DbContext
-	{
-		public DbSet<Content> Contents { get; set; }
+    {
+        public DbSet<Content> Contents { get; set; }
 
-		/// <inheritdoc />
-		public SharpDiffDbContext(DbContextOptions<SharpDiffDbContext> options) : base(options)
-		{ }
+        /// <inheritdoc />
+        public SharpDiffDbContext(DbContextOptions<SharpDiffDbContext> options) : base(options)
+        { }
 
-		/// <inheritdoc />
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			modelBuilder.ApplyConfiguration(new ContentMap());
+        /// <inheritdoc />
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new ContentMap());
 
-			base.OnModelCreating(modelBuilder);
-		}
-	}
+            base.OnModelCreating(modelBuilder);
+        }
+    }
 }

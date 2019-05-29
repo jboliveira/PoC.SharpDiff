@@ -25,7 +25,7 @@ namespace PoC.SharpDiff.WebAPI.Services.Validators
         /// </summary>
         /// <returns><c>true</c>, if valid base64, <c>false</c> otherwise.</returns>
         /// <param name="data">JSON base64 encoded binary data.</param>
-        private bool IsValidBase64(string data)
+        private static bool IsValidBase64(string data)
         {
             var bytes = new Span<byte>(new byte[data.Length]);
             return Convert.TryFromBase64String(data, bytes, out int bytesWritten);

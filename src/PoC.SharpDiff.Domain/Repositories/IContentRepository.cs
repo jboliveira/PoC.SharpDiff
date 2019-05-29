@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using PoC.SharpDiff.Domain.Models;
+﻿using PoC.SharpDiff.Domain.Models;
+using System.Threading.Tasks;
 
 namespace PoC.SharpDiff.Domain.Repositories
 {
@@ -7,6 +7,6 @@ namespace PoC.SharpDiff.Domain.Repositories
     {
         Task AddAsync(Content content);
         void Update(Content content);
-        Task<Content> GetContentAsync(int id, ContentDirection direction);
+        Task<Content> GetContentAsync(int id);
     }
 }

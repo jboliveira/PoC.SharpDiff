@@ -13,7 +13,7 @@ services:
 
     sharpdiff.api:
         environment:
-            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_ENVIRONMENT=Production
         build: 
             context: .
             dockerfile: src/PoC.SharpDiff.WebAPI/Dockerfile

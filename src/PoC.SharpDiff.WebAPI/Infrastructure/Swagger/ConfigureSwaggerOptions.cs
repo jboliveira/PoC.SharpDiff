@@ -9,56 +9,56 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace PoC.SharpDiff.WebAPI.Infrastructure.Swagger
 {
-	/// <summary>
-	/// Define versioned Swagger document.
-	/// For more info, see https://github.com/Microsoft/aspnet-api-versioning/wiki/API-Documentation
-	/// </summary>
-	public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
+    /// <summary>
+    /// Define versioned Swagger document.
+    /// For more info, see https://github.com/Microsoft/aspnet-api-versioning/wiki/API-Documentation
+    /// </summary>
+    public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
         private readonly IApiVersionDescriptionProvider _provider;
 
-		/// <summary>
-		/// Initializes a new instance of the
-		/// <see cref="T:PoC.SharpDiff.WebAPI.Infrastructure.Swagger.ConfigureSwaggerOptions"/> class.
-		/// </summary>
-		/// <param name="provider">Provider <see cref="IApiVersionDescriptionProvider"/>.</param>
-		public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider)
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="T:PoC.SharpDiff.WebAPI.Infrastructure.Swagger.ConfigureSwaggerOptions"/> class.
+        /// </summary>
+        /// <param name="provider">Provider <see cref="IApiVersionDescriptionProvider"/>.</param>
+        public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider)
         {
             _provider = provider;
         }
 
-		/// <summary>
-		/// Configure the Swagger options.
-		/// </summary>
-		/// <param name="options">Options <see cref="SwaggerGenOptions"/>.</param>
-		public void Configure(SwaggerGenOptions options)
+        /// <summary>
+        /// Configure the Swagger options.
+        /// </summary>
+        /// <param name="options">Options <see cref="SwaggerGenOptions"/>.</param>
+        public void Configure(SwaggerGenOptions options)
         {
-			options.DescribeAllEnumsAsStrings();
-			options.DescribeStringEnumsInCamelCase();
-			options.DescribeAllParametersInCamelCase();
+            options.DescribeAllEnumsAsStrings();
+            options.DescribeStringEnumsInCamelCase();
+            options.DescribeAllParametersInCamelCase();
 
-			foreach (var description in _provider.ApiVersionDescriptions)
+            foreach (var description in _provider.ApiVersionDescriptions)
             {
                 options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
             }
 
             // Add a custom filter for settint the default values.
-            options.OperationFilter<SwaggerDefaultValues>();            
+            options.OperationFilter<SwaggerDefaultValues>();
 
             // Set the comments path for the Swagger JSON and UI.
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             options.IncludeXmlComments(xmlPath);
 
-			options.AddFluentValidationRules();
-		}
+            options.AddFluentValidationRules();
+        }
 
-		/// <summary>
-		/// Creates the info for API version.
-		/// </summary>
-		/// <returns>The info for API version.</returns>
-		/// <param name="description">Description <see cref="ApiVersionDescription"/>.</param>
-		private static Info CreateInfoForApiVersion(ApiVersionDescription description)
+        /// <summary>
+        /// Creates the info for API version.
+        /// </summary>
+        /// <returns>The info for API version.</returns>
+        /// <param name="description">Description <see cref="ApiVersionDescription"/>.</param>
+        private static Info CreateInfoForApiVersion(ApiVersionDescription description)
         {
             var info = new Info
             {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using PoC.SharpDiff.Persistence.Contexts;
+using PoC.SharpDiff.WebAPI.Infrastructure.Extensions;
 using Serilog;
 using System;
 using System.IO;
@@ -10,14 +10,14 @@ using System.IO;
 namespace PoC.SharpDiff.WebAPI
 {
     /// <summary> Application entry point </summary>
-    static class Program
+    class Program
     {
         public static readonly string Namespace = typeof(Program).Namespace;
         public static readonly string AppName = Namespace.Substring(Namespace.LastIndexOf('.', Namespace.LastIndexOf('.') - 1) + 1);
 
         /// <summary> Application entry point </summary>
         /// <param name="args">Arguments</param>
-        static int Main(string[] args)
+        protected static int Main(string[] args)
         {
             var configuration = GetConfiguration();
 
@@ -28,15 +28,8 @@ namespace PoC.SharpDiff.WebAPI
                 Log.Information("Configuring web host ({ApplicationContext})...", AppName);
                 var host = BuildWebHost(configuration, args);
 
-                Log.Information("Configuring database (SharpDiffDbContext)...");
-                using (var scope = host.Services.CreateScope())
-                using (var context = scope.ServiceProvider.GetService<SharpDiffDbContext>())
-                {
-                    context.Database.EnsureCreated();
-                }
-
                 Log.Information("Starting web host ({ApplicationContext})...", AppName);
-                host.Run();
+                host.MigrateDatabase<SharpDiffDbContext>().Run();
 
                 return 0;
             }

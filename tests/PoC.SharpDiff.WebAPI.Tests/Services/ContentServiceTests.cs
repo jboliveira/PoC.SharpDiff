@@ -20,7 +20,7 @@ namespace PoC.SharpDiff.WebAPI.Tests
         {
             var sutContentService = SetupContentService(null);
 
-            var result = await sutContentService.UpsertContentAsync(null);
+            var result = await sutContentService.UpsertContentAsync(null, ContentDirection.Left);
 
             Assert.IsType<ContentResponse>(result);
         }
@@ -30,7 +30,7 @@ namespace PoC.SharpDiff.WebAPI.Tests
         {
             var sutContentService = SetupContentService(null);
 
-            var result = await sutContentService.UpsertContentAsync(null);
+            var result = await sutContentService.UpsertContentAsync(null, ContentDirection.Left);
 
             Assert.False(result.Success);
         }
@@ -40,7 +40,7 @@ namespace PoC.SharpDiff.WebAPI.Tests
         {
             var sutContentService = SetupContentService(null);
 
-            var result = await sutContentService.UpsertContentAsync(null);
+            var result = await sutContentService.UpsertContentAsync(null, ContentDirection.Left);
 
             Assert.Equal("'Content' should not be null.", result.Message);
         }
@@ -50,10 +50,10 @@ namespace PoC.SharpDiff.WebAPI.Tests
         [InlineData(2, ContentDirection.Right)]
         public static async Task UpsertContentAsync_ReturnsContentResponse_WhenNewContentIsValid(int id, ContentDirection direction)
         {
-            Content content = new ContentBuilder().WithId(id).WithDirection(direction).Build();
+            Content content = new ContentBuilder().WithId(id).Build();
             var sutContentService = SetupContentService(null);
 
-            var result = await sutContentService.UpsertContentAsync(content);
+            var result = await sutContentService.UpsertContentAsync(content, direction);
 
             Assert.IsType<ContentResponse>(result);
         }
@@ -63,10 +63,10 @@ namespace PoC.SharpDiff.WebAPI.Tests
         [InlineData(2, ContentDirection.Right)]
         public static async Task UpsertContentAsync_ReturnsContentResponseSuccess_WhenNewContentIsValid(int id, ContentDirection direction)
         {
-            Content content = new ContentBuilder().WithId(id).WithDirection(direction).Build();
+            Content content = new ContentBuilder().WithId(id).Build();
             var sutContentService = SetupContentService(null);
 
-            var result = await sutContentService.UpsertContentAsync(content);
+            var result = await sutContentService.UpsertContentAsync(content, direction);
 
             Assert.True(result.Success);
         }
@@ -76,10 +76,10 @@ namespace PoC.SharpDiff.WebAPI.Tests
         [InlineData(2, ContentDirection.Right)]
         public static async Task UpsertContentAsync_ReturnsContentResponseWithContentInserted_WhenNewContentIsValid(int id, ContentDirection direction)
         {
-            Content content = new ContentBuilder().WithId(id).WithDirection(direction).Build();
+            Content content = new ContentBuilder().WithId(id).Build();
             var sutContentService = SetupContentService(null);
 
-            var result = await sutContentService.UpsertContentAsync(content);
+            var result = await sutContentService.UpsertContentAsync(content, direction);
 
             Assert.Equal(content, result.Content);
         }
@@ -87,13 +87,13 @@ namespace PoC.SharpDiff.WebAPI.Tests
         [Fact]
         public static async Task UpsertContentAsync_ReturnsContentResponse_WhenUpdatingExistingContent()
         {
-            Content content1 = new ContentBuilder().WithId(2).WithBase64String("BilacSP".ConvertToBase64FromUTF8String()).Build();
-            Content content2 = new ContentBuilder().WithId(2).WithBase64String("BilacSPBrazil".ConvertToBase64FromUTF8String()).Build();
+            Content content1 = new ContentBuilder().WithId(2).WithLeftContent("BilacSP".ConvertToBase64FromUTF8String()).Build();
+            Content content2 = new ContentBuilder().WithId(2).WithLeftContent("BilacSPBrazil".ConvertToBase64FromUTF8String()).Build();
             var sutContentService1 = SetupContentService(null);
             var sutContentService2 = SetupContentService(content1);
 
-            await sutContentService1.UpsertContentAsync(content1);
-            var result = await sutContentService2.UpsertContentAsync(content2);
+            await sutContentService1.UpsertContentAsync(content1, ContentDirection.Left);
+            var result = await sutContentService2.UpsertContentAsync(content2, ContentDirection.Left);
 
             Assert.IsType<ContentResponse>(result);
         }
@@ -101,13 +101,13 @@ namespace PoC.SharpDiff.WebAPI.Tests
         [Fact]
         public static async Task UpsertContentAsync_ReturnsContentResponseSuccess_WhenUpdatingExistingContent()
         {
-            Content content1 = new ContentBuilder().WithId(2).WithBase64String("BilacSP".ConvertToBase64FromUTF8String()).Build();
-            Content content2 = new ContentBuilder().WithId(2).WithBase64String("BilacSPBrazil".ConvertToBase64FromUTF8String()).Build();
+            Content content1 = new ContentBuilder().WithId(2).WithLeftContent("BilacSP".ConvertToBase64FromUTF8String()).Build();
+            Content content2 = new ContentBuilder().WithId(2).WithLeftContent("BilacSPBrazil".ConvertToBase64FromUTF8String()).Build();
             var sutContentService1 = SetupContentService(null);
             var sutContentService2 = SetupContentService(content1);
 
-            await sutContentService1.UpsertContentAsync(content1);
-            var result = await sutContentService2.UpsertContentAsync(content2);
+            await sutContentService1.UpsertContentAsync(content1, ContentDirection.Left);
+            var result = await sutContentService2.UpsertContentAsync(content2, ContentDirection.Left);
 
             Assert.True(result.Success);
         }
@@ -115,13 +115,13 @@ namespace PoC.SharpDiff.WebAPI.Tests
         [Fact]
         public static async Task UpsertContentAsync_ReturnsContentResponseWithContentUpdated_WhenUpdatingExistingContent()
         {
-            Content content1 = new ContentBuilder().WithId(2).WithBase64String("BilacSP".ConvertToBase64FromUTF8String()).Build();
-            Content content2 = new ContentBuilder().WithId(2).WithBase64String("BilacSPBrazil".ConvertToBase64FromUTF8String()).Build();
+            Content content1 = new ContentBuilder().WithId(2).WithLeftContent("BilacSP".ConvertToBase64FromUTF8String()).Build();
+            Content content2 = new ContentBuilder().WithId(2).WithLeftContent("BilacSPBrazil".ConvertToBase64FromUTF8String()).Build();
             var sutContentService1 = SetupContentService(null);
             var sutContentService2 = SetupContentService(content1);
 
-            await sutContentService1.UpsertContentAsync(content1);
-            var result = await sutContentService2.UpsertContentAsync(content2);
+            await sutContentService1.UpsertContentAsync(content1, ContentDirection.Left);
+            var result = await sutContentService2.UpsertContentAsync(content2, ContentDirection.Left);
 
             Assert.Equal(content2, result.Content);
         }
@@ -132,11 +132,11 @@ namespace PoC.SharpDiff.WebAPI.Tests
         public static async Task UpsertContentAsync_ThrowExceptionContentResponse_WhenUnitOfWorkFail(int id, ContentDirection direction)
         {
             // Arrange
-            Content content = new ContentBuilder().WithId(id).WithDirection(direction).Build();
+            Content content = new ContentBuilder().WithId(id).Build();
             var sutContentService = SetupContentServiceException(content);
 
             // Act
-            var result = await sutContentService.UpsertContentAsync(content);
+            var result = await sutContentService.UpsertContentAsync(content, direction);
 
             // Asset
             Assert.IsType<ContentResponse>(result);
@@ -148,11 +148,11 @@ namespace PoC.SharpDiff.WebAPI.Tests
         public static async Task UpsertContentAsync_ThrowExceptionContentResponseNotSuccess_WhenUnitOfWorkFail(int id, ContentDirection direction)
         {
             // Arrange
-            Content content = new ContentBuilder().WithId(id).WithDirection(direction).Build();
+            Content content = new ContentBuilder().WithId(id).Build();
             var sutContentService = SetupContentServiceException(content);
 
             // Act
-            var result = await sutContentService.UpsertContentAsync(content);
+            var result = await sutContentService.UpsertContentAsync(content, direction);
 
             // Asset
             Assert.False(result.Success);
@@ -164,11 +164,11 @@ namespace PoC.SharpDiff.WebAPI.Tests
         public static async Task UpsertContentAsync_ThrowExceptionContentResponseErrorMessage_WhenUnitOfWorkFail(int id, ContentDirection direction)
         {
             // Arrange
-            Content content = new ContentBuilder().WithId(id).WithDirection(direction).Build();
+            Content content = new ContentBuilder().WithId(id).Build();
             var sutContentService = SetupContentServiceException(content);
 
             // Act
-            var result = await sutContentService.UpsertContentAsync(content);
+            var result = await sutContentService.UpsertContentAsync(content, direction);
 
             // Asset
             Assert.Contains("An error occurred when saving the content", result.Message);
@@ -180,11 +180,11 @@ namespace PoC.SharpDiff.WebAPI.Tests
         public static async Task UpsertContentAsync_ThrowExceptionContentNull_WhenUnitOfWorkFail(int id, ContentDirection direction)
         {
             // Arrange
-            Content content = new ContentBuilder().WithId(id).WithDirection(direction).Build();
+            Content content = new ContentBuilder().WithId(id).Build();
             var sutContentService = SetupContentServiceException(content);
 
             // Act
-            var result = await sutContentService.UpsertContentAsync(content);
+            var result = await sutContentService.UpsertContentAsync(content, direction);
 
             // Asset
             Assert.Null(result.Content);
@@ -196,30 +196,34 @@ namespace PoC.SharpDiff.WebAPI.Tests
         public static async Task GetContentAsync_ReturnsContentResponseWithContentFound_WhenLookingForExistingContent(int id, ContentDirection direction, string text)
         {
             // Arrange
-            Content content = new ContentBuilder().WithId(id).WithDirection(direction).WithBase64String(text.ConvertToBase64FromUTF8String()).Build();
+            Content content = new ContentBuilder().WithId(id).WithLeftContent(text.ConvertToBase64FromUTF8String()).Build();
+            if (direction == ContentDirection.Right)
+            {
+                content = new ContentBuilder().WithId(id).WithRightContent(text.ConvertToBase64FromUTF8String()).Build();
+            }
+
             var sutContentService = SetupContentService(content);
 
             // Act
-            var result = await sutContentService.GetContentAsync(id, direction);
+            var result = await sutContentService.GetContentAsync(id);
 
             // Assert
             Assert.Equal(result.Content, content);
         }
 
         [Theory]
-        [InlineData(1, ContentDirection.Left, "BilacSP")]
-        [InlineData(2, ContentDirection.Right, "BilacSPBrazil")]
-        public static async Task GetContentAsync_ReturnsContentResponseErrorMessage_WhenLookingForContentThatDoesNotExists(int id, ContentDirection direction, string text)
+        [InlineData(1, ContentDirection.Left)]
+        [InlineData(2, ContentDirection.Right)]
+        public static async Task GetContentAsync_ReturnsContentResponseErrorMessage_WhenLookingForContentThatDoesNotExists(int id, ContentDirection direction)
         {
             // Arrange
-            Content content = new ContentBuilder().WithId(id).WithDirection(direction).WithBase64String(text.ConvertToBase64FromUTF8String()).Build();
             var sutContentService = SetupContentService(null);
 
             // Act
-            var result = await sutContentService.GetContentAsync(id, direction);
+            var result = await sutContentService.GetContentAsync(id);
 
             // Assert
-            Assert.Contains($"Content {direction} {id} not found.", result.Message);
+            Assert.Contains($"Content {id} not found.", result.Message);
         }
 
         [Fact]
@@ -271,28 +275,28 @@ namespace PoC.SharpDiff.WebAPI.Tests
             Assert.True(diff.Length == 2);
         }
 
-		/// <summary>
-		/// The setup content service.
-		/// </summary>
+        /// <summary>
+        /// The setup content service.
+        /// </summary>
         private static readonly Func<Content, ContentService> SetupContentService = (contentReturn) =>
         {
             var stubContentRepository = new Mock<IContentRepository>();
             Content stubReturn = contentReturn;
-            stubContentRepository.Setup(s => s.GetContentAsync(It.IsAny<int>(), It.IsAny<ContentDirection>())).ReturnsAsync(stubReturn);
+            stubContentRepository.Setup(s => s.GetContentAsync(It.IsAny<int>())).ReturnsAsync(stubReturn);
 
             var stubUnitOfWork = new Mock<IUnitOfWork>();
 
             return new ContentService(stubContentRepository.Object, stubUnitOfWork.Object);
         };
 
-		/// <summary>
-		/// The setup content service exception.
-		/// </summary>
+        /// <summary>
+        /// The setup content service exception.
+        /// </summary>
         private static readonly Func<Content, ContentService> SetupContentServiceException = (contentReturn) =>
         {
             var stubContentRepository = new Mock<IContentRepository>();
             Content stubReturn = contentReturn;
-            stubContentRepository.Setup(s => s.GetContentAsync(It.IsAny<int>(), It.IsAny<ContentDirection>())).ReturnsAsync(stubReturn);
+            stubContentRepository.Setup(s => s.GetContentAsync(It.IsAny<int>())).ReturnsAsync(stubReturn);
 
             var stubUnitOfWork = new Mock<IUnitOfWork>();
             stubUnitOfWork.Setup(s => s.CommitAsync()).Throws(new Exception());

@@ -6,8 +6,8 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace PoC.SharpDiff.WebAPI.Infrastructure.Swagger
 {
-	/// <summary> Swagger Extensions  </summary>
-	public static class SwaggerExtensions
+    /// <summary> Swagger Extensions  </summary>
+    public static class SwaggerExtensions
     {
         /// <summary> Adds Swagger service and configure. </summary>
         /// <param name="services">IServiceCollection dependency</param>

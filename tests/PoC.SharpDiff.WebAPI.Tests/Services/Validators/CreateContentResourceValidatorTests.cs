@@ -9,7 +9,7 @@ namespace PoC.SharpDiff.WebAPI.Tests.Services.Validators
     [Trait("Category", "Unit")]
     public class CreateContentResourceValidatorTests
     {
-        private CreateContentResourceValidator validator;
+        private readonly CreateContentResourceValidator validator;
 
         public CreateContentResourceValidatorTests()
         {

@@ -6,8 +6,8 @@ namespace PoC.SharpDiff.Domain.Services
 {
     public interface IContentService
     {
-        Task<ContentResponse> UpsertContentAsync(Content content);
-        Task<ContentResponse> GetContentAsync(int id, ContentDirection direction);
+        Task<ContentResponse> UpsertContentAsync(Content content, ContentDirection direction);
+        Task<ContentResponse> GetContentAsync(int id);
         ContentDiffResponse CompareContents(byte[] contentLeft, byte[] contentRight);
     }
 }

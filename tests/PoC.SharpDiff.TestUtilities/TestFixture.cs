@@ -11,12 +11,12 @@ using System.Reflection;
 
 namespace PoC.SharpDiff.TestUtilities
 {
-	public class TestFixture<TStartup> : IDisposable
+    public class TestFixture<TStartup> : IDisposable
     {
         private readonly TestServer Server;
         public HttpClient Client { get; }
 
-		public TestFixture()
+        public TestFixture()
             : this("Testing")
         { }
 
@@ -57,16 +57,16 @@ namespace PoC.SharpDiff.TestUtilities
             services.AddSingleton(manager);
         }
 
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		protected virtual void Dispose(bool disposing)
-		{
-			Client.Dispose();
-			Server.Dispose();
-		}
-	}
+        protected virtual void Dispose(bool disposing)
+        {
+            Client.Dispose();
+            Server.Dispose();
+        }
+    }
 }

@@ -32,20 +32,29 @@ namespace PoC.SharpDiff.WebAPI.Services
         /// </summary>
         /// <returns>The content response async.</returns>
         /// <param name="content">Content.</param>
-        public async Task<ContentResponse> UpsertContentAsync(Content content)
+        /// <param name="direction">Content direction [Left/Right]</param>
+        public async Task<ContentResponse> UpsertContentAsync(Content content, ContentDirection direction)
         {
             if (content == null)
             {
                 return new ContentResponse("'Content' should not be null.");
             }
 
-            var result = await GetContentAsync(content.Id, content.Direction);
+            var result = await GetContentAsync(content.Id).ConfigureAwait(false);
 
             try
             {
                 if (result.Success)
                 {
-                    result.Content.Base64String = content.Base64String;
+                    if(direction == ContentDirection.Left)
+                    {
+                        result.Content.LeftContentData = content.LeftContentData;
+                    }
+                    else
+                    {
+                        result.Content.RightContentData = content.RightContentData;
+                    }
+                    
                     _contentRepository.Update(result.Content);
                 }
                 else
@@ -68,14 +77,13 @@ namespace PoC.SharpDiff.WebAPI.Services
         /// </summary>
         /// <returns>The content response async.</returns>
         /// <param name="id">Identifier.</param>
-        /// <param name="direction">Direction.</param>
-        public async Task<ContentResponse> GetContentAsync(int id, ContentDirection direction)
+        public async Task<ContentResponse> GetContentAsync(int id)
         {
-            var content = await _contentRepository.GetContentAsync(id, direction);
+            var content = await _contentRepository.GetContentAsync(id);
 
             if (content == null)
             {
-                return new ContentResponse($"Content {direction} {id} not found.");
+                return new ContentResponse($"Content {id} not found.");
             }
 
             return new ContentResponse(content);
@@ -102,7 +110,7 @@ namespace PoC.SharpDiff.WebAPI.Services
                 {
                     int j = i;
 
-					while ((contentLeft[j] != contentRight[j]) && j++ < contentLeft.Length - 1) { }
+                    while ((contentLeft[j] != contentRight[j]) && j++ < contentLeft.Length - 1) { }
 
                     differences.Add(new ContentDiff(i, j - i));
 

@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PoC.SharpDiff.Domain.Models;
 using PoC.SharpDiff.Domain.Services;
 using PoC.SharpDiff.Resources;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PoC.SharpDiff.WebAPI.Controllers
 {
-	/// <summary> Diff Controller </summary>
-	[ApiVersion("1.0")]
+    /// <summary> Diff Controller </summary>
+    [ApiVersion("1.0")]
     [Route("v{version:apiVersion}/[controller]")]
     public class DiffController : ControllerBase
     {
@@ -32,12 +32,20 @@ namespace PoC.SharpDiff.WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateContentLeftAsync(int id, [FromBody] CreateContentResource resource)
         {
-            var content = new Content(id, ContentDirection.Left, resource.Data);
+            if (resource == null)
+            {
+                return BadRequest("'Resource' should not be null.");
+            }
 
-            var result = await _contentService.UpsertContentAsync(content);
+            var content = new Content(id);
+            content.SetLeftContent(resource.Data);
+
+            var result = await _contentService.UpsertContentAsync(content, ContentDirection.Left);
 
             if (!result.Success)
+            {
                 return BadRequest(result.Message);
+            }
 
             return new OkObjectResult(result.Content);
         }
@@ -53,12 +61,20 @@ namespace PoC.SharpDiff.WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateContentRightAsync(int id, [FromBody] CreateContentResource resource)
         {
-            var content = new Content(id, ContentDirection.Right, resource.Data);
+            if (resource == null)
+            {
+                return BadRequest("'Resource' should not be null.");
+            }
 
-            var result = await _contentService.UpsertContentAsync(content);
+            var content = new Content(id);
+            content.SetRightContent(resource.Data);
+
+            var result = await _contentService.UpsertContentAsync(content, ContentDirection.Right);
 
             if (!result.Success)
+            {
                 return BadRequest(result.Message);
+            }
 
             return new OkObjectResult(result.Content);
         }
@@ -75,19 +91,26 @@ namespace PoC.SharpDiff.WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> CompareAsync(int id)
         {
-            var resultLeft = await _contentService.GetContentAsync(id, ContentDirection.Left);
-            if (!resultLeft.Success)
+            var result = await _contentService.GetContentAsync(id);
+            if (!result.Success)
             {
-                return new NotFoundObjectResult(resultLeft.Message);
+                return new NotFoundObjectResult(result.Message);
             }
 
-            var resultRight = await _contentService.GetContentAsync(id, ContentDirection.Right);
-            if (!resultRight.Success)
+            if (string.IsNullOrEmpty(result.Content.LeftContentData))
             {
-                return new NotFoundObjectResult(resultRight.Message);
+                return new NotFoundObjectResult($"Content {id} left not found.");
             }
 
-            var compareResult = _contentService.CompareContents(resultLeft.GetContentBinaryData(), resultRight.GetContentBinaryData());
+            if (string.IsNullOrEmpty(result.Content.RightContentData))
+            {
+                return new NotFoundObjectResult($"Content {id} right not found.");
+            }
+
+            var contentLeft = Convert.FromBase64String(result.Content.LeftContentData);
+            var contentRight = Convert.FromBase64String(result.Content.RightContentData);
+
+            var compareResult = _contentService.CompareContents(contentLeft, contentRight);
             if (compareResult.Differences?.Count > 0)
             {
                 return new OkObjectResult(compareResult.Differences);

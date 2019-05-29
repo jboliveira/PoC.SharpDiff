@@ -5,20 +5,20 @@ using System.Threading.Tasks;
 namespace PoC.SharpDiff.Persistence.Repositories
 {
     public class UnitOfWork : IUnitOfWork
-	{
-		private readonly SharpDiffDbContext _context;
+    {
+        private readonly SharpDiffDbContext _context;
 
-		public UnitOfWork(SharpDiffDbContext context)
-		{
-			_context = context;
-		}
+        public UnitOfWork(SharpDiffDbContext context)
+        {
+            _context = context;
+        }
 
-		/// <summary>
-		/// Commit.
-		/// </summary>
-		public async Task CommitAsync()
-		{
-			await _context.SaveChangesAsync();
-		}
-	}
+        /// <summary>
+        /// Commit.
+        /// </summary>
+        public async Task CommitAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+    }
 }
