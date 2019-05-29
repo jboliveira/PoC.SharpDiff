@@ -125,15 +125,15 @@ tests (order Test Explorer by Traits)
 
 ### Next
 
-[X] Include/Improve test layer with a better code coverage
-[X] Review comments and documentation
-[X] Use Docker/Docker Compose for database/SQLServer
-[ ] Improve persistence layer and models
-[ ] Add Postman collection and environment
-[ ] Create a Watchdog UI to watch health and report about the API
-[ ] Capture application logs via third-party service
-[ ] Add a Vault service to manage secrets and protect sensitive data
-[ ] WIP :rocket:
+- [x] Include/Improve test layer with a better code coverage
+- [x] Review comments and documentation
+- [x] Use Docker/Docker Compose for database/SQLServer
+- [ ] Improve persistence layer and models
+- [ ] Add Postman collection and environment
+- [ ] Create a Watchdog UI to watch health and report about the API
+- [ ] Capture application logs via third-party service
+- [ ] Add a Vault service to manage secrets and protect sensitive data
+- [ ] WIP :rocket:
 
 
 ### Packages
