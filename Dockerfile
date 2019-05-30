@@ -1,2 +1,2 @@
-FROM ubuntu
-RUN docker-compose build
+FROM .
+RUN docker build -f src/PoC.SharpDiff.WebAPI/Dockerfile .
