@@ -5,9 +5,9 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 WORKDIR /src
 
-COPY src/*/*.csproj /src/csproj-files/
+COPY ./src/*/*.csproj /src/csproj-files/
 
-COPY tools/database-update.sh /app/
+COPY ./tools/database-update.sh /app/
 
 COPY . .
 WORKDIR /src/src/PoC.SharpDiff.WebAPI
