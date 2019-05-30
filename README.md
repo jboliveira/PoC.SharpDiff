@@ -15,6 +15,9 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=sqale_index)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
 
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jbuenoliveira/dockerhub.svg)
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/jbuenoliveira/dockerhub.svg)
+
 ![GitHub repo size](https://img.shields.io/github/repo-size/jboliveira/PoC.SharpDiff.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/jboliveira/PoC.SharpDiff.svg)
 
