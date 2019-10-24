@@ -2,7 +2,6 @@
 
 # Tooling Path Variables
 runnerSonarScanner="${TRAVIS_BUILD_DIR}/tools/sonar/SonarScanner.MSBuild.dll"
-runnerCodeCoverage="${TRAVIS_BUILD_DIR}/tools/codecoverage/Microsoft.CodeCoverage.16.1.0/build/netstandard1.0/CodeCoverage/CodeCoverage.exe"
 runnerCodacy="${TRAVIS_BUILD_DIR}/tools/codacy-coverage-reporter.jar"
 
 # csprojs Path Variables
@@ -18,7 +17,7 @@ else
 fi
 
 # Build
-dotnet build --configuration Release -p:Version=1.0.${TRAVIS_BUILD_NUMBER}
+dotnet build --configuration Release -p:Version=1.0.${TRAVIS_BUILD_NUMBER} --force
 
 # Test & Code Coverage
 dotnet test $pathResourcesTests/PoC.SharpDiff.Resources.Tests.csproj --configuration Release --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory $pathResourcesTests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=$pathResourcesTests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"

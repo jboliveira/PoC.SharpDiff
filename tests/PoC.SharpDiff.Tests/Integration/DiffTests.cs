@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 using PoC.SharpDiff.Domain.Models;
 using PoC.SharpDiff.Resources;
 using PoC.SharpDiff.TestUtilities;
 using PoC.SharpDiff.TestUtilities.Builders;
 using PoC.SharpDiff.WebAPI;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace PoC.SharpDiff.Tests

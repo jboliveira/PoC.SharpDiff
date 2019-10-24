@@ -44,8 +44,7 @@ tests (order Test Explorer by Traits)
 ### Tech Stack:
 
 - Visual Studio 2019 (Mac/Win)
-- .NET Core 2.2
-- CSharp 7.3
+- .NET Core 3.0 [3.0.100]
 - Entity Framework Core (for data access)
 - Entity Framework In-Memory Provider (for testing purposes)
 - HealthCheck
@@ -135,10 +134,13 @@ tests (order Test Explorer by Traits)
 - [x] Review comments and documentation
 - [x] Use Docker/Docker Compose for database/SQLServer
 - [x] Improve persistence layer and models
+- [x] Migration to .NET Core 3.0
 - [ ] Add Postman collection and environment
 - [ ] Create a Watchdog UI to watch health and report about the API
 - [ ] Capture application logs via third-party service
 - [ ] Add a Vault service to manage secrets and protect sensitive data
+- [ ] Add System and Smoke tests
+- [ ] Improve validation layer
 - [ ] WIP :rocket:
 
 

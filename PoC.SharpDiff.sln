@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{171EC0DA-476
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F76A0A47-7485-4879-AD43-D82DCDD7A486}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoC.SharpDiff.WebAPI", "src\PoC.SharpDiff.WebAPI\PoC.SharpDiff.WebAPI.csproj", "{2C43F2B6-A9B2-4CBC-8A20-89BBA218B842}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.SharpDiff.WebAPI", "src\PoC.SharpDiff.WebAPI\PoC.SharpDiff.WebAPI.csproj", "{2C43F2B6-A9B2-4CBC-8A20-89BBA218B842}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1136807-2F63-4EF6-81C5-979BE0889D2B}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,21 +15,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.yml = docker-compose.yml
 		global.json = global.json
 		README.md = README.md
+		tools\travis-build.sh = tools\travis-build.sh
+		tools\travis-install-dependencies.sh = tools\travis-install-dependencies.sh
+		tools\database-update.sh = tools\database-update.sh
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoC.SharpDiff.Tests", "tests\PoC.SharpDiff.Tests\PoC.SharpDiff.Tests.csproj", "{565F425C-4BC9-4217-ADDA-246C62AB156E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.SharpDiff.Tests", "tests\PoC.SharpDiff.Tests\PoC.SharpDiff.Tests.csproj", "{565F425C-4BC9-4217-ADDA-246C62AB156E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoC.SharpDiff.WebAPI.Tests", "tests\PoC.SharpDiff.WebAPI.Tests\PoC.SharpDiff.WebAPI.Tests.csproj", "{0B54A108-AB37-4B2F-AA60-37743A2C2652}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.SharpDiff.WebAPI.Tests", "tests\PoC.SharpDiff.WebAPI.Tests\PoC.SharpDiff.WebAPI.Tests.csproj", "{0B54A108-AB37-4B2F-AA60-37743A2C2652}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoC.SharpDiff.TestUtilities", "tests\PoC.SharpDiff.TestUtilities\PoC.SharpDiff.TestUtilities.csproj", "{59FF7751-8AFE-457E-89B3-6ECA19789D26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.SharpDiff.TestUtilities", "tests\PoC.SharpDiff.TestUtilities\PoC.SharpDiff.TestUtilities.csproj", "{59FF7751-8AFE-457E-89B3-6ECA19789D26}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoC.SharpDiff.Domain", "src\PoC.SharpDiff.Domain\PoC.SharpDiff.Domain.csproj", "{59649006-8FAF-4735-85E4-93199C2EB6C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.SharpDiff.Domain", "src\PoC.SharpDiff.Domain\PoC.SharpDiff.Domain.csproj", "{59649006-8FAF-4735-85E4-93199C2EB6C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoC.SharpDiff.Resources", "src\PoC.SharpDiff.Resources\PoC.SharpDiff.Resources.csproj", "{578EC435-7B8F-4FD9-9498-E826CD066E72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.SharpDiff.Resources", "src\PoC.SharpDiff.Resources\PoC.SharpDiff.Resources.csproj", "{578EC435-7B8F-4FD9-9498-E826CD066E72}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoC.SharpDiff.Persistence", "src\PoC.SharpDiff.Persistence\PoC.SharpDiff.Persistence.csproj", "{85B25BE9-906F-4EBA-8A1C-8C7CB3531A7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.SharpDiff.Persistence", "src\PoC.SharpDiff.Persistence\PoC.SharpDiff.Persistence.csproj", "{85B25BE9-906F-4EBA-8A1C-8C7CB3531A7D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoC.SharpDiff.Resources.Tests", "tests\PoC.SharpDiff.Resources.Tests\PoC.SharpDiff.Resources.Tests.csproj", "{E7B14DBA-BD48-47E7-94B6-199C476E27E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.SharpDiff.Resources.Tests", "tests\PoC.SharpDiff.Resources.Tests\PoC.SharpDiff.Resources.Tests.csproj", "{E7B14DBA-BD48-47E7-94B6-199C476E27E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

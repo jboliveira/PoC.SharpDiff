@@ -4,6 +4,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -33,8 +34,6 @@ namespace PoC.SharpDiff.WebAPI.Infrastructure.Swagger
         /// <param name="options">Options <see cref="SwaggerGenOptions"/>.</param>
         public void Configure(SwaggerGenOptions options)
         {
-            options.DescribeAllEnumsAsStrings();
-            options.DescribeStringEnumsInCamelCase();
             options.DescribeAllParametersInCamelCase();
 
             foreach (var description in _provider.ApiVersionDescriptions)
@@ -58,19 +57,18 @@ namespace PoC.SharpDiff.WebAPI.Infrastructure.Swagger
         /// </summary>
         /// <returns>The info for API version.</returns>
         /// <param name="description">Description <see cref="ApiVersionDescription"/>.</param>
-        private static Info CreateInfoForApiVersion(ApiVersionDescription description)
+        private static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
         {
-            var info = new Info
+            var info = new OpenApiInfo
             {
                 Title = $"{Program.AppName} {description.ApiVersion}",
                 Version = description.ApiVersion.ToString(),
                 Description = "PoC SharpDiff ASP.NET Core Web API",
-                TermsOfService = "None",
-                Contact = new Contact
+                Contact= new OpenApiContact
                 {
                     Name = "Jader Oliveira",
                     Email = "jader.bueno@yahoo.ie",
-                    Url = "https://www.linkedin.com/in/jaderbueno/"
+                    Url = new Uri("https://www.linkedin.com/in/jaderbueno/")
                 }
             };
 

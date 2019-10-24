@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using PoC.SharpDiff.Persistence.Contexts;
-using PoC.SharpDiff.WebAPI.Infrastructure.Extensions;
-using Serilog;
-using System;
+﻿using System;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace PoC.SharpDiff.WebAPI
 {
@@ -19,17 +16,21 @@ namespace PoC.SharpDiff.WebAPI
         /// <param name="args">Arguments</param>
         protected static int Main(string[] args)
         {
-            var configuration = GetConfiguration();
-
-            Log.Logger = BuildSerilogLogger(configuration);
+            Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .WriteTo.Console()
+                    .CreateLogger();
 
             try
             {
                 Log.Information("Configuring web host ({ApplicationContext})...", AppName);
-                var host = BuildWebHost(configuration, args);
+                var host = BuildWebHost(args);
+
+                //Log.Information("Loading Db Context ({ApplicationContext})...", AppName);
+                //host.MigrateDatabase<SharpDiffDbContext>();
 
                 Log.Information("Starting web host ({ApplicationContext})...", AppName);
-                host.MigrateDatabase<SharpDiffDbContext>().Run();
+                host.Run();
 
                 return 0;
             }
@@ -44,34 +45,20 @@ namespace PoC.SharpDiff.WebAPI
             }
         }
 
-        private static IWebHost BuildWebHost(IConfiguration configuration, string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .CaptureStartupErrors(false)
-                .UseStartup<Startup>()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseConfiguration(configuration)
-                .UseSerilog()
-                .Build();
-
-        private static ILogger BuildSerilogLogger(IConfiguration configuration)
-        {
-            return new LoggerConfiguration()
-                .MinimumLevel.Verbose()
-                .Enrich.WithProperty("ApplicationContext", AppName)
-                .Enrich.FromLogContext()
-                .WriteTo.Console()
-                .ReadFrom.Configuration(configuration)
-                .CreateLogger();
-        }
-
-        private static IConfiguration GetConfiguration()
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddEnvironmentVariables();
-
-            return builder.Build();
-        }
+        public static IHost BuildWebHost(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .UseSerilog()
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.CaptureStartupErrors(true);
+                webBuilder.UseStartup<Startup>();
+                webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+            })
+            // Add a new service provider configuration
+            .UseDefaultServiceProvider((context, options) =>
+            {
+                options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+                options.ValidateOnBuild = true;
+            }).Build();
     }
 }

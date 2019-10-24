@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -14,9 +15,9 @@ namespace PoC.SharpDiff.WebAPI.Infrastructure.Swagger
     public class SwaggerDefaultValues : IOperationFilter
     {
         /// <summary> Applies the filter to the specified operation using the given context. </summary>
-        /// <param name="operation">The operation <see cref="Operation"/> to apply the filter to.</param>
+        /// <param name="operation">The operation <see cref="OpenApiOperation"/> to apply the filter to.</param>
         /// <param name="context">The current operation filter context <see cref="OperationFilterContext"/>.</param>
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             ApplyConsumes(operation);
             ApplyParameters(operation, context);
@@ -25,30 +26,30 @@ namespace PoC.SharpDiff.WebAPI.Infrastructure.Swagger
         /// <summary>
         /// Applies the consumes.
         /// </summary>
-        /// <param name="operation">Operation <see cref="Operation"/>.</param>
-        private void ApplyConsumes(Operation operation)
+        /// <param name="operation">Operation <see cref="OpenApiOperation"/>.</param>
+        private void ApplyConsumes(OpenApiOperation operation)
         {
-            if (operation.Consumes == null)
+            /*if (operation.Consumes == null)
             {
                 return;
             }
 
             operation.Consumes.Clear();
-            operation.Consumes = new List<string> { MediaTypeNames.Application.Json };
+            operation.Consumes = new List<string> { MediaTypeNames.Application.Json };*/
         }
 
         /// <summary>
         /// Applies the parameters.
         /// </summary>
-        /// <param name="operation">Operation <see cref="Operation"/>.</param>
+        /// <param name="operation">Operation <see cref="OpenApiOperation"/>.</param>
         /// <param name="context">Context <see cref="OperationFilterContext"/>.</param>
-        private void ApplyParameters(Operation operation, OperationFilterContext context)
+        private void ApplyParameters(OpenApiOperation operation, OperationFilterContext context)
         {
             if (operation.Parameters == null)
             {
                 return;
             }
-
+            /*
             foreach (var parameter in operation.Parameters.OfType<NonBodyParameter>())
             {
                 var description = context.ApiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
@@ -70,7 +71,7 @@ namespace PoC.SharpDiff.WebAPI.Infrastructure.Swagger
                 }
 
                 parameter.Required |= !routeInfo.IsOptional;
-            }
+            }*/
         }
     }
 }

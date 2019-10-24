@@ -1,13 +1,11 @@
-﻿using FluentValidation.AspNetCore;
+﻿using System.Net.Mime;
+using System.Text.Json.Serialization;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using PoC.SharpDiff.Persistence.Contexts;
-using System.Net.Mime;
 
 namespace PoC.SharpDiff.WebAPI.Infrastructure.Extensions
 {
@@ -28,46 +26,37 @@ namespace PoC.SharpDiff.WebAPI.Infrastructure.Extensions
                     }
                     else
                     {
-                        options.UseSqlServer(connString).EnableSensitiveDataLogging(true);
+                        options.UseSqlServer(connString)
+                            .EnableSensitiveDataLogging(true);
                     }
                 });
         }
 
-        /// <summary> Adds HealthCheck service and configure a self check and SqlServer check. </summary>
-        /// <param name="services">IServiceCollection dependency</param>
-        /// <param name="connString">ConnectionString.</param>
-        public static void AddCustomHealthCheck(this IServiceCollection services, string connString)
-        {
-            var hcBuilder = services.AddHealthChecks();
-            hcBuilder.AddCheck("self", () => HealthCheckResult.Healthy());
-            hcBuilder.AddSqlServer(connString);
-        }
-
         /// <summary> Adds MVC Core services and configure. </summary>
         /// <param name="services">IServiceCollection dependency</param>
-        public static void AddCustomMvcCore(this IServiceCollection services)
+        public static void AddCustomControllers(this IServiceCollection services)
         {
-            services.AddMvcCore(options =>
+            services.AddRouting(options => options.LowercaseUrls = true);
+
+            services.AddControllers()
+            .AddMvcOptions(options =>
             {
                 // Apply filter globally to force response in JSON format.
                 options.Filters.Add(new ProducesAttribute(MediaTypeNames.Application.Json));
             })
-            .AddApiExplorer()
-            .AddJsonFormatters()
             .AddJsonOptions(options =>
             {
                 // Suppress properties with null value.
-                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                options.JsonSerializerOptions.IgnoreNullValues = true;
                 // Converts an Enum to and from its name string value.
-                options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             })
-            .SetCompatibilityVersion(CompatibilityVersion.Latest)
             .AddFluentValidation(config =>
             {
                 config.RegisterValidatorsFromAssemblyContaining<Startup>();
-            });
-
-            services.AddRouting(options => options.LowercaseUrls = true);
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Latest)
+            .AddControllersAsServices();
         }
 
         /// <summary> Adds API Versioning service and configure. </summary>
