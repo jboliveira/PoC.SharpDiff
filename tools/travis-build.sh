@@ -1,9 +1,8 @@
 #!/bin/sh
 
 # Project Variables
-version = 1.0
+version="1.0"
 netConfiguration="Release"
-netCoreTargetVersion="netcoreapp3.0"
 
 # Tooling Path Variables
 runnerSonarScanner="${TRAVIS_BUILD_DIR}/tools/sonar/SonarScanner.MSBuild.dll"
@@ -22,12 +21,12 @@ else
 fi
 
 # Build
-dotnet build -c $netConfiguration -f $netCoreTargetVersion -p:Version=$version.${TRAVIS_BUILD_NUMBER} --force
+dotnet build -c $netConfiguration -p:Version=$version.${TRAVIS_BUILD_NUMBER} --force
 
 # Test & Code Coverage
-dotnet test $pathResourcesTests/PoC.SharpDiff.Resources.Tests.csproj -c $netConfiguration -f $netCoreTargetVersion --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory $pathResourcesTests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=$pathResourcesTests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
-dotnet test $pathWebAPITests/PoC.SharpDiff.WebAPI.Tests.csproj -c $netConfiguration -f $netCoreTargetVersion --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory $pathWebAPITests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=$pathWebAPITests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
-dotnet test $pathIntegrationTests/PoC.SharpDiff.Tests.csproj -c $netConfiguration -f $netCoreTargetVersion --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory $pathIntegrationTests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=$pathIntegrationTests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
+dotnet test $pathResourcesTests/PoC.SharpDiff.Resources.Tests.csproj -c $netConfiguration --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory $pathResourcesTests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=$pathResourcesTests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
+dotnet test $pathWebAPITests/PoC.SharpDiff.WebAPI.Tests.csproj -c $netConfiguration --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory $pathWebAPITests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=$pathWebAPITests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
+dotnet test $pathIntegrationTests/PoC.SharpDiff.Tests.csproj -c $netConfiguratio --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory $pathIntegrationTests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=$pathIntegrationTests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
 
 # Send Coverage to Codacy
 java -jar $runnerCodacy report --language CSharp --force-language -r $pathResourcesTests/BuildReports/Coverage/coverage.cobertura.xml --partial
