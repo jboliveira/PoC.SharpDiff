@@ -53,12 +53,14 @@ tests (order Test Explorer by Traits)
 - Swagger
 - Serilog
 - FluentValidation
-- Azure SQL Server
+- SQL Server
 - xUnit
 - Docker
 - TravisCI
+- Azure DevOps
+- GitHub Actions
 - SonarCloud
-
+- Codacy
 
 ### Installing and Running
 
