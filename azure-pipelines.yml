@@ -52,16 +52,21 @@ steps:
 - script: dotnet build -c $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-- script: dotnet test tests/PoC.SharpDiff.Resources.Tests/PoC.SharpDiff.Resources.Tests.csproj -c $(buildConfiguration) --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory tests/PoC.SharpDiff.Resources.Tests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=tests/PoC.SharpDiff.Resources.Tests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
+- script: dotnet test $(System.DefaultWorkingDirectory)/tests/PoC.SharpDiff.Resources.Tests/PoC.SharpDiff.Resources.Tests.csproj -c $(buildConfiguration) --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory $(System.DefaultWorkingDirectory)/tests/PoC.SharpDiff.Resources.Tests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=$(System.DefaultWorkingDirectory)/tests/PoC.SharpDiff.Resources.Tests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
   displayName: 'dotnet test PoC.SharpDiff.Resources.Tests $(buildConfiguration)'
 
-- script: dotnet test tests/PoC.SharpDiff.WebAPI.Tests/PoC.SharpDiff.WebAPI.Tests.csproj -c $(buildConfiguration) --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory tests/PoC.SharpDiff.WebAPI.Tests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=tests/PoC.SharpDiff.WebAPI.Tests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
+- script: dotnet test $(System.DefaultWorkingDirectory)/tests/PoC.SharpDiff.WebAPI.Tests/PoC.SharpDiff.WebAPI.Tests.csproj -c $(buildConfiguration) --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory $(System.DefaultWorkingDirectory)/tests/PoC.SharpDiff.WebAPI.Tests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=$(System.DefaultWorkingDirectory)/tests/PoC.SharpDiff.WebAPI.Tests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
   displayName: 'dotnet test PoC.SharpDiff.WebAPI.Tests $(buildConfiguration)'
 
-- script: dotnet test tests/PoC.SharpDiff.Tests/PoC.SharpDiff.Tests.csproj -c $(buildConfiguration) --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory tests/PoC.SharpDiff.Tests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=tests/PoC.SharpDiff.Tests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
+- script: dotnet test $(System.DefaultWorkingDirectory)/tests/PoC.SharpDiff.Tests/PoC.SharpDiff.Tests.csproj -c $(buildConfiguration) --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory $(System.DefaultWorkingDirectory)/tests/PoC.SharpDiff.Tests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=$(System.DefaultWorkingDirectory)/tests/PoC.SharpDiff.Tests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
   displayName: 'dotnet test PoC.SharpDiff.Tests $(buildConfiguration)'
 
 - task: PublishTestResults@1
   inputs:
     testRunner: VSTest
-    testResultsFiles: 'tests/*.Tests/BuildReports/UnitTests/*.trx'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/tests/*.Tests/BuildReports/UnitTests/*.trx'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/tests/*.Tests/BuildReports/Coverage/*.xml'
