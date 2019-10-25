@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.com/jboliveira/PoC.SharpDiff.svg?token=hoKsky9xhb4rvz3jQYmq&branch=master)](https://travis-ci.com/jboliveira/PoC.SharpDiff)
 [![Actions Status](https://github.com/jboliveira/PoC.SharpDiff/workflows/Build/badge.svg)](https://github.com/jboliveira/PoC.SharpDiff/actions)
+[![Build Status](https://buenocode.visualstudio.com/PoC.SharpDiff/_apis/build/status/jboliveira.PoC.SharpDiff?branchName=master)](https://buenocode.visualstudio.com/PoC.SharpDiff/_build/latest?definitionId=8&branchName=master)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aea87107017c4c3b8d52b760b32970be)](https://www.codacy.com/app/jader.oliveira/PoC.SharpDiff?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jboliveira/PoC.SharpDiff&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/aea87107017c4c3b8d52b760b32970be)](https://www.codacy.com/app/jader.oliveira/PoC.SharpDiff?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jboliveira/PoC.SharpDiff&amp;utm_campaign=Badge_Coverage)
