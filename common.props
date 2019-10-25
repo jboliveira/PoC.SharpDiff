@@ -2,8 +2,8 @@
   <PropertyGroup Label="SDK Versions">
     <NetCoreTargetVersion>netcoreapp3.0</NetCoreTargetVersion>
     <NetStandardTargetVersion>netstandard2.1</NetStandardTargetVersion>
-    <LangVersion>latest</LangVersion>
     <RuntimeFrameworkVersion>3.0.0</RuntimeFrameworkVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Package information">

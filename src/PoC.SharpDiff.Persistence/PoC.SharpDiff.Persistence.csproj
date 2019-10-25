@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>$(NetStandardTargetVersion)</TargetFramework>
+    <TargetFramework>$(NetCoreTargetVersion)</TargetFramework>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 

@@ -1,9 +1,9 @@
 sudo: required
-dist: xenial
+dist: bionic
 solution: PoC.SharpDiff.sln
 jdk: openjdk10
 language: csharp
-#dotnet: 3.0.100
+dotnet: 3.0
 mono: none
 
 #branches:
@@ -13,25 +13,25 @@ mono: none
 
 global:
   - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
-  - DOTNET_CLI_TELEMETRY_OPTOUT=1
+  - DOTNET_CLI_TELEMETRY_OPTOUT=0
   - ASPNETCORE_ENVIRONMENT=Production
-  - ASPNETCORE_DETAILEDERRORS=1
+  - ASPNETCORE_DETAILEDERRORS=0
 
 addons:
   sonarcloud:
     organization: jboliveira-github
-  snaps:
-  - name: dotnet-sdk
-    confinement: classic
-    channel: latest
+#  snaps:
+#  - name: dotnet-sdk
+#    confinement: classic
+#    channel: 2.1/stable
 
-before_install:
-  - sudo snap alias dotnet-sdk.dotnet dotnet
-  - dotnet --version
+#before_install:
+#  - sudo snap alias dotnet-sdk.dotnet dotnet
 
 install:
   - bash ./tools/travis-install-dependencies.sh
   
 script:
+#  - dotnet --info
   - git fetch --unshallow || true
   - bash ./tools/travis-build.sh
