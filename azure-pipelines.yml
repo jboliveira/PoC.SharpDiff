@@ -56,9 +56,12 @@ steps:
       sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/tests/*.Resources.Tests/BuildReports/Coverage/coverage.opencover.xml,$(Build.SourcesDirectory)/tests/*.WebAPI.Tests/BuildReports/Coverage/coverage.opencover.xml
       sonar.cs.opencover.it.reportsPaths=$(Build.SourcesDirectory)/tests/PoC.SharpDiff.Tests/BuildReports/Coverage/coverage.opencover.xml
 
-- script: dotnet publish -c $(buildConfiguration)
-  displayName: 'dotnet publish $(buildConfiguration)'
+- task: DotNetCoreCLI@2
   continueOnError: false
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    configuration: $(buildConfiguration)
 
 - script: dotnet test $(Build.SourcesDirectory)/tests/PoC.SharpDiff.Resources.Tests/PoC.SharpDiff.Resources.Tests.csproj -c $(buildConfiguration) --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory $(Build.SourcesDirectory)/tests/PoC.SharpDiff.Resources.Tests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=$(Build.SourcesDirectory)/tests/PoC.SharpDiff.Resources.Tests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
   displayName: 'dotnet test PoC.SharpDiff.Resources.Tests $(buildConfiguration)'
@@ -84,18 +87,19 @@ steps:
   continueOnError: false
   inputs:
     testRunner: VSTest
-    testResultsFiles: '$(System.DefaultWorkingDirectory)/tests/*.Tests/BuildReports/UnitTests/*.trx'
+    testResultsFiles: '$(Build.SourcesDirectory)/tests/*.Tests/BuildReports/UnitTests/*.trx'
 
 - task: PublishCodeCoverageResults@1
   continueOnError: false
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/tests/*.Tests/BuildReports/Coverage/*.xml'
+    summaryFileLocation: '$(Build.SourcesDirectory)/tests/*.Tests/BuildReports/Coverage/*.xml'
 
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
-    packagesToPack: '$(Build.SourcesDirectory)/src/**/*.csproj'
+    packagesToPack: '$(Build.SourcesDirectory)/**/**/*.csproj'
+    nobuild: true
+    includesymbols: true
+    includesource: true
     versioningScheme: 'byBuildNumber'
-    includeSymbols: true
-    verbosityPack: 'Normal'
