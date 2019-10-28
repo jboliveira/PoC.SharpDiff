@@ -107,6 +107,9 @@ steps:
     command: 'publish'
     publishWebProjects: true
     configuration: $(buildConfiguration)
+    majorVersion: '1'
+    minorVersion: '0'
+    patchVersion: $(BuildID)
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet pack'
@@ -117,4 +120,6 @@ steps:
     nobuild: true
     includesymbols: true
     includesource: true
-    versioningScheme: 'byBuildNumber'
+    majorVersion: '1'
+    minorVersion: '0'
+    patchVersion: $(BuildID)
