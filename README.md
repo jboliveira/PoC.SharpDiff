@@ -1,6 +1,6 @@
 # PoC.SharpDiff
 
-[![Build Status](https://travis-ci.com/jboliveira/PoC.SharpDiff.svg?token=hoKsky9xhb4rvz3jQYmq&branch=master)](https://travis-ci.com/jboliveira/PoC.SharpDiff)
+[![Travis Status](https://img.shields.io/travis/com/jboliveira/PoC.SharpDiff?label=Build&logo=travis&logoColor=%23FFF)](https://travis-ci.com/jboliveira/PoC.SharpDiff)
 [![Actions Status](https://github.com/jboliveira/PoC.SharpDiff/workflows/Build/badge.svg)](https://github.com/jboliveira/PoC.SharpDiff/actions)
 [![Build Status](https://buenocode.visualstudio.com/PoC.SharpDiff/_apis/build/status/jboliveira.PoC.SharpDiff?branchName=master)](https://buenocode.visualstudio.com/PoC.SharpDiff/_build/latest?definitionId=8&branchName=master)
 
