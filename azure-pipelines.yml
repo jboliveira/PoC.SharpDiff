@@ -44,22 +44,6 @@ pr:
 
 steps:
 - task: SonarCloudPrepare@1
-  condition: and(failed(), in(variables['Build.Reason'], 'IndividualCI', 'PullRequest'))
-  inputs:
-    SonarCloud: 'Personal SonarCloud'
-    organization: 'jboliveira-github'
-    scannerMode: 'MSBuild'
-    projectKey: 'jboliveira_PoC.SharpDiff'
-    projectName: 'PoC.SharpDiff'
-    extraProperties: |
-      sonar.branch.name=$(Build.SourceBranchName)
-      sonar.cs.vstest.reportsPaths=$(Build.SourcesDirectory)/tests/*.Tests/BuildReports/UnitTests/*.trx
-      sonar.cs.xunit.reportsPaths=$(Build.SourcesDirectory)/tests/*.Tests/BuildReports/UnitTests/*.xml
-      sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/tests/*.Resources.Tests/BuildReports/Coverage/coverage.opencover.xml,$(Build.SourcesDirectory)/tests/*.WebAPI.Tests/BuildReports/Coverage/coverage.opencover.xml
-      sonar.cs.opencover.it.reportsPaths=$(Build.SourcesDirectory)/tests/PoC.SharpDiff.Tests/BuildReports/Coverage/coverage.opencover.xml
-
-- task: SonarCloudPrepare@1
-  condition: and(succeeded(), in(variables['Build.Reason'], 'IndividualCI', 'PullRequest'))
   inputs:
     SonarCloud: 'Personal SonarCloud'
     organization: 'jboliveira-github'
