@@ -125,14 +125,3 @@ steps:
     minorVersion: '0'
     patchVersion: $(BuildID)
     packDirectory: $(Build.ArtifactStagingDirectory)
-
-- task: NuGetAuthenticate@0
-  inputs:
-    nuGetServiceConnections: 'Personal Nuget'
-
-- task: NuGetCommand@2
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'Personal Nuget'
