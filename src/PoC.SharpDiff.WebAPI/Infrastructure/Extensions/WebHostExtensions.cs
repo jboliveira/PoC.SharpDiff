@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PoC.SharpDiff.Persistence.Contexts;
 
@@ -15,11 +15,11 @@ namespace PoC.SharpDiff.WebAPI.Infrastructure.Extensions
     {
         /// <summary> Ensure that all migrations were applied. </summary>
         /// <typeparam name="T" cref="SharpDiffDbContext">SharpDiff DbContext</typeparam>
-        /// <param name="webHost" cref="IWebHost">IWebHost dependency</param>
+        /// <param name="host" cref="IHost">IHost dependency</param>
         /// <returns>WebHost</returns>
-        public static IWebHost MigrateDatabase<T>(this IWebHost webHost) where T : DbContext
+        public static IHost MigrateDatabase<T>(this IHost host) where T : DbContext
         {
-            using (var scope = webHost.Services.CreateScope())
+            using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 try
@@ -37,7 +37,7 @@ namespace PoC.SharpDiff.WebAPI.Infrastructure.Extensions
                 }
             }
 
-            return webHost;
+            return host;
         }
 
         /// <summary> Checks if has any remaining migration to apply </summary>

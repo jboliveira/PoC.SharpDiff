@@ -2,6 +2,8 @@
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using PoC.SharpDiff.Persistence.Contexts;
+using PoC.SharpDiff.WebAPI.Infrastructure.Extensions;
 using Serilog;
 
 namespace PoC.SharpDiff.WebAPI
@@ -14,20 +16,17 @@ namespace PoC.SharpDiff.WebAPI
 
         /// <summary> Application entry point </summary>
         /// <param name="args">Arguments</param>
-        protected static int Main(string[] args)
+        private static int Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration()
-                    .Enrich.FromLogContext()
-                    .WriteTo.Console()
-                    .CreateLogger();
+            Log.Logger = CreateLoggerConfig();
 
             try
             {
                 Log.Information("Configuring web host ({ApplicationContext})...", AppName);
                 var host = BuildWebHost(args);
 
-                //Log.Information("Loading Db Context ({ApplicationContext})...", AppName);
-                //host.MigrateDatabase<SharpDiffDbContext>();
+                Log.Information("Loading Db Context ({ApplicationContext})...", AppName);
+                host.MigrateDatabase<SharpDiffDbContext>();
 
                 Log.Information("Starting web host ({ApplicationContext})...", AppName);
                 host.Run();
@@ -45,7 +44,13 @@ namespace PoC.SharpDiff.WebAPI
             }
         }
 
-        public static IHost BuildWebHost(string[] args) =>
+        private static ILogger CreateLoggerConfig() =>
+            new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .WriteTo.Console()
+                    .CreateLogger();
+
+        private static IHost BuildWebHost(string[] args) =>
         Host.CreateDefaultBuilder(args)
             .UseSerilog()
             .ConfigureWebHostDefaults(webBuilder =>

@@ -22,13 +22,13 @@ namespace PoC.SharpDiff.WebAPI
     /// <summary> API Startup class </summary>
     public class Startup
     {
-        public IConfiguration Configuration { get; }
-        public IHostEnvironment CurrentEnvironment { get; }
+        private readonly IConfiguration configuration;
+        private readonly IHostEnvironment hostEnvironment;
 
-        public Startup(IConfiguration configuration, IHostEnvironment currentEnvironment)
+        public Startup(IConfiguration config, IHostEnvironment env)
         {
-            Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            CurrentEnvironment = currentEnvironment ?? throw new ArgumentNullException(nameof(currentEnvironment));
+            configuration = config ?? throw new ArgumentNullException(nameof(config));
+            hostEnvironment = env ?? throw new ArgumentNullException(nameof(env));
         }
 
         /// <summary> This method gets called by the runtime in order to add services to the container. </summary>
@@ -37,8 +37,8 @@ namespace PoC.SharpDiff.WebAPI
             services.AddOptions();
             services.AddHealthChecks();
 
-            var connString = Configuration.GetConnectionString("SharpDiffDatabase");
-            services.AddCustomDbContext(connString, CurrentEnvironment.IsEnvironment("Testing"));
+            var connString = configuration.GetConnectionString("SharpDiffDatabase");
+            services.AddCustomDbContext(connString, hostEnvironment.IsEnvironment("Testing"));
             services.AddCustomControllers();
             services.AddCustomApiVersioning();
             services.AddCorrelationId();
@@ -49,9 +49,9 @@ namespace PoC.SharpDiff.WebAPI
         }
 
         /// <summary> This method gets called by the runtime in order to configure the HTTP request pipeline. </summary>
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
-            if (CurrentEnvironment.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseSerilogRequestLogging();
                 app.UseDeveloperExceptionPage();

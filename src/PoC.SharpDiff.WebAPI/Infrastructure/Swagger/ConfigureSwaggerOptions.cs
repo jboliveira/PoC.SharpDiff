@@ -41,9 +41,6 @@ namespace PoC.SharpDiff.WebAPI.Infrastructure.Swagger
                 options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
             }
 
-            // Add a custom filter for settint the default values.
-            options.OperationFilter<SwaggerDefaultValues>();
-
             // Set the comments path for the Swagger JSON and UI.
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -67,8 +64,7 @@ namespace PoC.SharpDiff.WebAPI.Infrastructure.Swagger
                 Contact= new OpenApiContact
                 {
                     Name = "Jader Oliveira",
-                    Email = "jader.bueno@yahoo.ie",
-                    Url = new Uri("https://www.linkedin.com/in/jaderbueno/")
+                    Email = "jader.bueno@yahoo.ie"
                 }
             };
 
