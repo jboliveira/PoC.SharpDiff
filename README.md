@@ -179,4 +179,3 @@ EFCore - SQLServer Packages:
 
 [//]: #
    [VS2019]: <https://visualstudio.microsoft.com/vs/>
-   [.NET SDK]: <https://dotnet.microsoft.com/download/dotnet-core/2.2>

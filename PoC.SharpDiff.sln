@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		tools\travis-build.sh = tools\travis-build.sh
 		tools\travis-install-dependencies.sh = tools\travis-install-dependencies.sh
 		tools\database-update.sh = tools\database-update.sh
+		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoC.SharpDiff.Tests", "tests\PoC.SharpDiff.Tests\PoC.SharpDiff.Tests.csproj", "{565F425C-4BC9-4217-ADDA-246C62AB156E}"
