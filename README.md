@@ -1,11 +1,17 @@
 # PoC.SharpDiff
 
-[![Travis Status](https://img.shields.io/travis/com/jboliveira/PoC.SharpDiff?label=Build&logo=travis&logoColor=%23FFF)](https://travis-ci.com/jboliveira/PoC.SharpDiff)
+- **Builds**
+
 [![Actions Status](https://github.com/jboliveira/PoC.SharpDiff/workflows/Build/badge.svg)](https://github.com/jboliveira/PoC.SharpDiff/actions)
+[![Travis Status](https://img.shields.io/travis/com/jboliveira/PoC.SharpDiff?label=Build&logo=travis&logoColor=%23FFF)](https://travis-ci.com/jboliveira/PoC.SharpDiff)
 [![Build Status](https://buenocode.visualstudio.com/PoC.SharpDiff/_apis/build/status/jboliveira.PoC.SharpDiff?branchName=master)](https://buenocode.visualstudio.com/PoC.SharpDiff/_build/latest?definitionId=8&branchName=master)
+
+- **Codacy**
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aea87107017c4c3b8d52b760b32970be)](https://www.codacy.com/app/jader.oliveira/PoC.SharpDiff?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jboliveira/PoC.SharpDiff&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/aea87107017c4c3b8d52b760b32970be)](https://www.codacy.com/app/jader.oliveira/PoC.SharpDiff?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jboliveira/PoC.SharpDiff&amp;utm_campaign=Badge_Coverage)
+
+- **SonarCloud**
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=alert_status)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
@@ -17,8 +23,12 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=jboliveira_PoC.SharpDiff&metric=sqale_index)](https://sonarcloud.io/dashboard?id=jboliveira_PoC.SharpDiff)
 
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jbuenoliveira/dockerhub.svg)
-![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/jbuenoliveira/dockerhub.svg)
+- **Docker Cloud**
+
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jbuenoliveira/dockerhub.svg)](https://cloud.docker.com/repository/docker/jbuenoliveira/dockerhub/builds)
+[![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/jbuenoliveira/dockerhub.svg)](https://cloud.docker.com/repository/docker/jbuenoliveira/dockerhub/builds)
+
+- **GitHub**
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/jboliveira/PoC.SharpDiff.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/jboliveira/PoC.SharpDiff.svg)
