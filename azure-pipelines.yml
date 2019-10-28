@@ -68,9 +68,6 @@ steps:
     projectKey: 'jboliveira_PoC.SharpDiff'
     projectName: 'PoC.SharpDiff'
     extraProperties: |
-      sonar.pullrequest.provider=github
-      sonar.pullrequest.github.repository=jboliveira/PoC.SharpDiff
-      sonar.pullrequest.key=$(System.PullRequest.PullRequestId)
       sonar.cs.vstest.reportsPaths=$(Build.SourcesDirectory)/tests/*.Tests/BuildReports/UnitTests/*.trx
       sonar.cs.xunit.reportsPaths=$(Build.SourcesDirectory)/tests/*.Tests/BuildReports/UnitTests/*.xml
       sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/tests/*.Resources.Tests/BuildReports/Coverage/coverage.opencover.xml,$(Build.SourcesDirectory)/tests/*.WebAPI.Tests/BuildReports/Coverage/coverage.opencover.xml
