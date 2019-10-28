@@ -4,6 +4,12 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
 trigger:
   branches:
     include:
@@ -19,12 +25,6 @@ trigger:
     exclude:
     - '.github/*'
     - '*.md'
-
-pr:
-  autoCancel: true
-  branches:
-    include:
-    - '*' 
 
 schedules:
 - cron: "0 0 * * *"
@@ -42,16 +42,15 @@ schedules:
     - releases/*
   always: true
 
-pool:
-  vmImage: 'ubuntu-latest'
-
-variables:
-  buildConfiguration: 'Release'
+pr:
+  autoCancel: true
+  branches:
+    include:
+    - '*' 
 
 steps:
 - task: SonarCloudPrepare@1
   condition: and(failed(), and(variables['Build.Reason'], 'IndividualCI', 'PullRequest'))
-  continueOnError: false
   inputs:
     SonarCloud: 'Personal SonarCloud'
     organization: 'jboliveira-github'
@@ -66,8 +65,7 @@ steps:
       sonar.cs.opencover.it.reportsPaths=$(Build.SourcesDirectory)/tests/PoC.SharpDiff.Tests/BuildReports/Coverage/coverage.opencover.xml
 
 - task: SonarCloudPrepare@1
-  condition: and(succeeded(), and(variables['Build.Reason'], 'IndividualCI', 'PullRequest'))
-  continueOnError: false
+  condition: and(succeeded(), in(variables['Build.Reason'], 'IndividualCI', 'PullRequest'))
   inputs:
     SonarCloud: 'Personal SonarCloud'
     organization: 'jboliveira-github'
