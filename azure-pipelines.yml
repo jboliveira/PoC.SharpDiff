@@ -44,7 +44,7 @@ pr:
 
 steps:
 - task: SonarCloudPrepare@1
-  condition: and(failed(), and(variables['Build.Reason'], 'IndividualCI', 'PullRequest'))
+  condition: and(failed(), in(variables['Build.Reason'], 'PullRequest'))
   inputs:
     SonarCloud: 'Personal SonarCloud'
     organization: 'jboliveira-github'
@@ -59,7 +59,7 @@ steps:
       sonar.cs.opencover.it.reportsPaths=$(Build.SourcesDirectory)/tests/PoC.SharpDiff.Tests/BuildReports/Coverage/coverage.opencover.xml
 
 - task: SonarCloudPrepare@1
-  condition: and(succeeded(), and(variables['Build.Reason'], 'IndividualCI', 'PullRequest'))
+  condition: and(succeeded(), in(variables['Build.Reason'], 'PullRequest'))
   continueOnError: false
   inputs:
     SonarCloud: 'Personal SonarCloud'
