@@ -1,25 +1,18 @@
 sudo: required
-dist: bionic
 solution: PoC.SharpDiff.sln
 language: csharp
-dotnet: 3.0
+dotnet: 3.0.100
 mono: none
 jdk: openjdk10
-
-env:
-  global:
-    - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
-    - DOTNET_CLI_TELEMETRY_OPTOUT=0
-    - ASPNETCORE_ENVIRONMENT=Production
-    - ASPNETCORE_DETAILEDERRORS=0
 
 addons:
   sonarcloud:
     organization: jboliveira-github
 
 install:
+  - sudo apt-get install -qq dotnet-sdk-2.0.0
   - bash ./tools/travis-install-dependencies.sh
-  
+
 script:
   - git fetch --unshallow || true
   - bash ./tools/travis-build.sh
