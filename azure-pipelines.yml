@@ -56,8 +56,8 @@ steps:
       sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/tests/*.Resources.Tests/BuildReports/Coverage/coverage.opencover.xml,$(Build.SourcesDirectory)/tests/*.WebAPI.Tests/BuildReports/Coverage/coverage.opencover.xml
       sonar.cs.opencover.it.reportsPaths=$(Build.SourcesDirectory)/tests/PoC.SharpDiff.Tests/BuildReports/Coverage/coverage.opencover.xml
 
-- script: dotnet build -c $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- script: dotnet publish -c $(buildConfiguration)
+  displayName: 'dotnet publish $(buildConfiguration)'
   continueOnError: false
 
 - script: dotnet test $(Build.SourcesDirectory)/tests/PoC.SharpDiff.Resources.Tests/PoC.SharpDiff.Resources.Tests.csproj -c $(buildConfiguration) --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" --results-directory $(Build.SourcesDirectory)/tests/PoC.SharpDiff.Resources.Tests/BuildReports/UnitTests /p:CollectCoverage=true /p:CoverletOutput=$(Build.SourcesDirectory)/tests/PoC.SharpDiff.Resources.Tests/BuildReports/Coverage/ "/p:CoverletOutputFormat=\"cobertura,opencover\"" /p:Exclude="[xunit.*]*"
@@ -91,3 +91,11 @@ steps:
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(System.DefaultWorkingDirectory)/tests/*.Tests/BuildReports/Coverage/*.xml'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '$(Build.SourcesDirectory)/src/**/*.csproj'
+    versioningScheme: 'byBuildNumber'
+    includeSymbols: true
+    verbosityPack: 'Normal'
