@@ -50,7 +50,7 @@ variables:
 
 steps:
 - task: SonarCloudPrepare@1
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'IndividualCI', 'PullRequest'))
   continueOnError: false
   inputs:
     SonarCloud: 'Personal SonarCloud'
@@ -66,7 +66,7 @@ steps:
       sonar.cs.opencover.it.reportsPaths=$(Build.SourcesDirectory)/tests/PoC.SharpDiff.Tests/BuildReports/Coverage/coverage.opencover.xml
 
 - task: SonarCloudPrepare@1
-  condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
+  condition: and(succeeded(), eq(variables['Build.Reason'], 'IndividualCI', 'PullRequest'))
   continueOnError: false
   inputs:
     SonarCloud: 'Personal SonarCloud'
