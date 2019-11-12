@@ -1,4 +1,4 @@
-# PoC.SharpDiff
+# PoC.SharpDiff #
 
 - **Builds**
 
@@ -32,7 +32,7 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/jboliveira/PoC.SharpDiff.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/jboliveira/PoC.SharpDiff.svg)
-
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/jboliveira/PoC.SharpDiff.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/jboliveira/PoC.SharpDiff/alerts/)
 
 ## Overview
 
