@@ -30,6 +30,7 @@
 
 - **GitHub**
 
+[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/jbuenoliveira/poc-sharpdiff-tech-stack)
 ![GitHub repo size](https://img.shields.io/github/repo-size/jboliveira/PoC.SharpDiff.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/jboliveira/PoC.SharpDiff.svg)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/jboliveira/PoC.SharpDiff.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/jboliveira/PoC.SharpDiff/alerts/)
